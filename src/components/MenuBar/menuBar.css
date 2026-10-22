@@ -1,0 +1,110 @@
+.menu-nav a,
+.menu-nav button,
+.menu-nav .menu-label {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  color: white;
+}
+
+.menu-nav a,
+.menu-nav button {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.menu-nav a {
+  text-decoration: none;
+}
+
+.container1 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.ticket-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ticket-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 138px;
+  height: 44px;
+  padding: 0 16px;
+  background: #d89a36;
+  border-radius: 6px 0 0 6px;
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.ticket-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
+}
+
+.ticket-btn-icon svg {
+  width: 18px;
+  height: 18px;
+  color: #fff;
+}
+
+.ticket-btn:hover {
+  background: #c78a2b;
+}
+
+.ticket-btn:hover::after {
+  background: #c78a2b;
+}
+
+.login-btn-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.login-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #d89a36;
+  border-radius: 0 6px 6px 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.login-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-btn-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.login-btn:hover {
+  background: #c78a2b;
+}
+
+.login-btn:hover::after {
+  background: #c78a2b;
+}
+
