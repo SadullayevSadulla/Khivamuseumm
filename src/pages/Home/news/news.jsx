@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { FiCalendar, FiEye } from 'react-icons/fi';
 import api from '../../../api';
 import { Icons } from '../../../icons/icons';
@@ -31,7 +32,7 @@ const formatDate = (value, language) => {
 
 const News = () => {
   const { i18n, t } = useTranslation();
-  const currentLang = i18n.language || 'uz';
+  const currentLang = (i18n.resolvedLanguage || i18n.language || 'uz').split('-')[0];
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -42,21 +43,21 @@ const News = () => {
         const res = await api.get('/news');
         const items = Array.isArray(res?.data?.data) ? res.data.data : [];
         setData(items);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Xatolik');
+      } catch {
+        setError(t('home.error'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [t]);
 
   if (loading) {
     return (
       <div className="container">
         <div className="news mt-25">
-          <p>Yuklanmoqda...</p>
+              <p>{t('news.loading')}</p>
         </div>
       </div>
     );
@@ -66,7 +67,7 @@ const News = () => {
     return (
       <div className="container">
         <div className="news mt-25">
-          <p>{error}</p>
+              <p>{error}</p>
         </div>
       </div>
     );
@@ -76,10 +77,10 @@ const News = () => {
     <div className="container">
       <div className="news mt-25">
         <div className="img_top flex justify-between items-center">
-          <h1>{t('news.title', 'Yangiliklar')}</h1>
+          <h1>{t('news.title')}</h1>
           <div className="btnn">
             <button type="button" className="btn flex items-center gap-1">
-              {t('more', 'Batafsil')}
+              {t('home.more')}
               <Icons.rightIcon height="1em" />
             </button>
           </div>
@@ -89,35 +90,39 @@ const News = () => {
           {data.map((item) => {
             const mainImage = item?.images?.find((img) => img.mainImage === true);
             const imageUrl = mainImage?.url || item?.images?.[0]?.url || '';
-            const title = getLocalizedText(item?.title, currentLang) || t('news.title', 'Yangiliklar');
-            const description = getLocalizedText(item?.description, currentLang);
+            const title = getLocalizedText(item?.title, currentLang) || t('news.title');
+            const detailId = item.slug || item.id;
 
             return (
               <article className="news-card" key={item.id || item.slug || item.title}>
-                {imageUrl ? (
-                  <img src={imageUrl} alt={title} loading="lazy" />
-                ) : (
-                  <div className="news-card__placeholder">No image</div>
-                )}
+                <Link
+                  to={`/news/${encodeURIComponent(detailId)}`}
+                  className="news-card__link"
+                  aria-label={`${title} — ${t('home.more')}`}
+                >
+                  {imageUrl ? (
+                    <img src={imageUrl} alt={title} loading="lazy" />
+                  ) : (
+                    <div className="news-card__placeholder">{t('home.noImage')}</div>
+                  )}
+                  <div className="news-card__body">
+                    <div className="news-meta">
+                      <span className="news-meta__item">
+                        <FiCalendar />
+                        {formatDate(item.createdAt, currentLang)}
+                      </span>
+                      <span className="news-meta__item">
+                        <FiEye />
+                        {item.views ?? 0}
+                      </span>
+                    </div>
 
-                <div className="news-card__body">
-                  <div className="news-meta">
-                    <span className="news-meta__item">
-                      <FiCalendar />
-                      {formatDate(item.createdAt, currentLang)}
-                    </span>
-                    <span className="news-meta__item">
-                      <FiEye />
-                      {item.views ?? 0}
+                    <h3>{title}</h3>
+                    <span className="news-link-btn">
+                      {t('home.more')}
                     </span>
                   </div>
-
-                  <h3>{title}</h3>
-
-                  <button type="button" className="news-link-btn">
-                    {t('more', 'Batafsil')}
-                  </button>
-                </div>
+                </Link>
               </article>
             );
           })}

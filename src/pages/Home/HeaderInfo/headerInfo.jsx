@@ -8,33 +8,32 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Icons } from '../../../icons/icons';
+import { useTranslation } from 'react-i18next';
 import './headerInfo.css';
 
 const slides = [
   {
     id: 1,
-    title: 'ICHAN QALA',
-    location: 'Khiva city, Khorezm region',
+    titleKey: 'home.hero.slide1',
     image:
       '/_1756448270764.jpeg',
   },
   {
     id: 2,
-    title: 'KALTA MINOR – THE UNFINISHED ICON OF KHIVA',
-    location: 'Khiva city, Khorezm region',
+    titleKey: 'home.hero.slide2',
     image:
       'xiva-3.jpg',
   },
   {
     id: 3,
-    title: 'ARDA KHIVA – MODERN LIVING IN HISTORIC KHIVA',
-    location: 'Khiva city, Khorezm region',
+    titleKey: 'home.hero.slide3',
     image:
       'xiva-2.jpg',
   },
 ];
 
 export const HeaderInfo = () => {
+  const { t } = useTranslation();
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
@@ -83,13 +82,13 @@ export const HeaderInfo = () => {
                 }}
               >
                 <div className="hero-slide__content">
-                  <h1>{slide.title}</h1>
+                  <h1>{t(slide.titleKey)}</h1>
                   <div className="hero-slide__meta">
                     <span className="hero-slide__divider" />
                     <span className="hero-slide__icon">
                       <Icons.locationIcon />
                     </span>
-                    <p>{slide.location}</p>
+                    <p>{t('home.hero.location')}</p>
                   </div>
                 </div>
               </div>
@@ -98,11 +97,11 @@ export const HeaderInfo = () => {
         </Swiper>
 
         <div className="hero-controls">
-          <button ref={prevRef} type="button" className="hero-nav hero-nav--prev" aria-label="Previous slide">
+          <button ref={prevRef} type="button" className="hero-nav hero-nav--prev" aria-label={t('home.hero.previousSlide')}>
             <span>&lt;</span>
           </button>
-          <div className="custom-pagination" aria-label="Slider pagination" />
-          <button ref={nextRef} type="button" className="hero-nav hero-nav--next" aria-label="Next slide">
+          <div className="custom-pagination" aria-label={t('home.hero.pagination')} />
+          <button ref={nextRef} type="button" className="hero-nav hero-nav--next" aria-label={t('home.hero.nextSlide')}>
             <span>&gt;</span>
           </button>
         </div>

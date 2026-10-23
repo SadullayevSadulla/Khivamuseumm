@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Icons } from "../../icons/icons";
+import LanguageDropdown from "../Header/Language";
 import "./menuBar.css";
 
-const MenuBar = () => {
+const MenuBar = ({ isFixed = false }) => {
   const { t } = useTranslation();
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
@@ -126,27 +127,27 @@ const MenuBar = () => {
           </nav>
         </div>
         <div className="flex items-center gap-0.5">
-          <div className="ticket-btn-wrap">
-            <Link
-              to={"/tickets"}
-              className="ticket-btn"
-            >
-              <span>{t("header.aTickets")}</span>
-              <span className="ticket-btn-icon">
-                <Icons.ticketIcon />
-              </span>
-            </Link>
-          </div>
-          <div className="login-btn-wrap">
-            <Link
-              to={"/login"}
-              className="login-btn"
-            >
-              <span className="login-btn-icon">
-                <Icons.personIcon />
-              </span>
-            </Link>
-          </div>
+          {isFixed ? (
+            <LanguageDropdown />
+          ) : (
+            <>
+              <div className="ticket-btn-wrap">
+                <Link to={"/tickets"} className="ticket-btn">
+                  <span>{t("header.aTickets")}</span>
+                  <span className="ticket-btn-icon">
+                    <Icons.ticketIcon />
+                  </span>
+                </Link>
+              </div>
+              <div className="login-btn-wrap">
+                <Link to={"/login"} className="login-btn">
+                  <span className="login-btn-icon">
+                    <Icons.personIcon />
+                  </span>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

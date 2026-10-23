@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import "./galereya.css"
 import { Icons } from "../../../icons/icons";
 import api from '../../../api';
+import { useTranslation } from 'react-i18next';
 
 const Galereya = () => {
+    const { t } = useTranslation();
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -12,20 +14,15 @@ const Galereya = () => {
             try {
                 const res = await api.get("/gallery")
                 setData(res.data.data)
-                console.log(res.data.data)
-            } catch (err) {
-                if (err instanceof Error) {
-                    setError(err.message)
-                } else {
-                    setError("Xatolik")
-                }
+            } catch {
+                setError(t('home.error'))
             } finally {
                 setLoading(false)
             }
         }
         fetchData()
-    }, [])
-    if (loading) return <p>Yuklanmoqda...</p>
+    }, [t])
+    if (loading) return <p>{t('home.loading')}</p>
     if (error) return <p>{error}</p>
 
     const renderImage = (item) => item && (
@@ -38,9 +35,9 @@ const Galereya = () => {
         <div className='container'>
             <div className="galereya">
                 <div className="img_top flex justify-between items-center">
-                    <h1>Galereya</h1>
+                    <h1>{t('home.galleryTitle')}</h1>
                     <div className="btnn">
-                        <button className='btn flex items-center gap-1'>Batafsil<Icons.rightIcon height="1em" /></button>
+                        <button className='btn flex items-center gap-1'>{t('home.more')}<Icons.rightIcon height="1em" /></button>
                     </div>
                 </div>
                 <div className="gallery-mosaic">

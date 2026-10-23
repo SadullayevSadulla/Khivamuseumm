@@ -2,6 +2,28 @@
   background-color:  #1a1a1a;
 }
 
+.menu_bar {
+  min-height: 1px;
+}
+
+.menu_bar.is-fixed {
+  height: 85px;
+}
+
+.menu_bar-inner {
+  background-color: #1a1a1a;
+  border-top: 1px solid #995e12;
+}
+
+.menu_bar-inner.is-fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  border-top: none;
+}
+
 .header_top {
   display: flex;
   justify-content: space-between;

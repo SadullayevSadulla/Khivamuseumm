@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "./header.css";
 import { Icons } from "../../icons/icons";
 import LanguageDropdown from "./Language";
@@ -6,7 +7,31 @@ import MenuBar from "../MenuBar/menuBar";
 import HeaderModal from "./headerModol";
 
 const Header = () => {
+  const { t } = useTranslation();
   const [isModal, setIsModal] = useState(false);
+  const [isMenuFixed, setIsMenuFixed] = useState(false);
+  const menuBarRef = useRef(null);
+  const menuBarTopRef = useRef(0);
+
+  useEffect(() => {
+    const measureMenuBar = () => {
+      if (menuBarRef.current) {
+        menuBarTopRef.current = menuBarRef.current.getBoundingClientRect().top + window.scrollY;
+      }
+    };
+    const updateFixedMenu = () => {
+      setIsMenuFixed(window.scrollY >= menuBarTopRef.current);
+    };
+
+    measureMenuBar();
+    updateFixedMenu();
+    window.addEventListener("scroll", updateFixedMenu, { passive: true });
+    window.addEventListener("resize", measureMenuBar);
+    return () => {
+      window.removeEventListener("scroll", updateFixedMenu);
+      window.removeEventListener("resize", measureMenuBar);
+    };
+  }, []);
 
   return (
     <div className="wrap relative">
@@ -48,7 +73,7 @@ const Header = () => {
               type="button"
               onClick={() => setIsModal(true)}
               className="menu-trigger lg:hidden inline-flex items-center justify-center text-white"
-              aria-label="Open menu"
+              aria-label={t("header.openMenu")}
             >
               <Icons.menuIcon className="w-6 h-6" />
             </button>
@@ -92,9 +117,14 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <div className="menu_bar border-t border-[#995e12]">
-        <div className="container">
-          <MenuBar />
+      <div
+        ref={menuBarRef}
+        className={`menu_bar ${isMenuFixed ? "is-fixed" : ""}`}
+      >
+        <div className={`menu_bar-inner ${isMenuFixed ? "is-fixed" : ""}`}>
+          <div className="container">
+            <MenuBar isFixed={isMenuFixed} />
+          </div>
         </div>
       </div>
     </div>

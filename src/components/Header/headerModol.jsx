@@ -96,7 +96,7 @@ export default function HeaderModal({ isModal, closeModal }) {
             </Link>
           </nav>
         </div>
-        <div>comming soon</div>
+        <div>{t('comingSoon')}</div>
         {/* <div className="shrink-0 bg-white dark:bg-dark-main flex flex-col items-center gap-5 pt-5">
           <div className="flex items-center gap-5 w-full">
             <div className="flex-1">
