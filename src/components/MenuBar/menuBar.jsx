@@ -43,7 +43,7 @@ const MenuBar = () => {
                 </span>
               </button>
               {isAboutOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-46 pt-2">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-46 pt-2 z-50">
                   <div className="w-full flex flex-col items-center bg-link-hover rounded-lg">
                     <Link
                       to={"/about"}
@@ -97,7 +97,7 @@ const MenuBar = () => {
                 </span>
               </button>
               {isNewsOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-45 pt-2">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-45 pt-2 z-50">
                   <div className="w-full flex flex-col items-center bg-link-hover rounded-lg">
                     <Link
                       to={"/news"}

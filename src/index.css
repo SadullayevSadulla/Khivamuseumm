@@ -1,12 +1,19 @@
 @import "tailwindcss";
 
-@theme {
-  --color-dark-main: #1f2937;
-}
-
 .container {
   max-width: 1290px;
   margin:0 auto;
+}
+
+.container2{
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body{
+  background-color: #2f2d2d;
 }
 
 @theme {
