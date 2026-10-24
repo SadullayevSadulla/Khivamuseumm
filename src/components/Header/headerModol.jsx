@@ -52,7 +52,7 @@ export default function HeaderModal({ isModal, closeModal }) {
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
-              to={"/empolyees"}
+              to={"/employees"}
               className="font-bold text-sm uppercase leading-[110%] group relative"
             >
               {t("header.employees")}

@@ -43,7 +43,7 @@ export const MainM = () => {
                     <p>{t('home.collectionDescription')}</p>
                 </div>
                 <div className="section_bot">
-                    {data.slice(0, 4).map((item, index) => (
+                    {data.slice(0, 7).map((item, index) => (
                         <article className="section_bot_card" key={item.id ?? index}>
                             <img
                                 className="section_bot_image"

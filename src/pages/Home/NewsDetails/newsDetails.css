@@ -14,12 +14,6 @@
   font-size: 14px;
 }
 
-.news-detail__breadcrumb a,
-.news-detail__back {
-  color: #e19d3b;
-  text-decoration: none;
-}
-
 .news-detail__breadcrumb a:hover,
 .news-detail__back:hover {
   text-decoration: underline;
@@ -83,7 +77,7 @@
 .news-detail__description {
   color: #f1f1f1;
   font-size: 17px;
-  line-height: 1.8;
+  /* line-height: 1.8; */
   overflow-wrap: anywhere;
 }
 
