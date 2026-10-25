@@ -13,7 +13,7 @@ export const Home = () => {
       <MainTez/>
       <MainM/>
       <Galereya/>
-      <News/>
+      <News showDetails />
     </>
   )
 }

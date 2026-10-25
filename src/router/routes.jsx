@@ -1,4 +1,6 @@
 import About from "../pages/About/about";
+import Announcements from "../pages/Announcements/announcements";
+import AnnouncementDetails from "../pages/Announcements/AnnouncementDetails";
 import Collactions from "../pages/collections/collactions";
 import Employees from "../pages/Employees/employees";
 import Gallery from "../pages/gallery/gallery";
@@ -42,4 +44,14 @@ export const router = [
         path: "/gallery",
         element: <Gallery />
     },
+    {
+        id: 8,
+        path: "/announcements/:announcementDetails",
+        element: <AnnouncementDetails />
+    },
+    {
+        id: 9,
+        path: "/announcements",
+        element: <Announcements />
+    }
 ]

@@ -1,6 +1,4 @@
 .hodimlar {
-    background: #232327;
-    min-height: 100vh;
     padding: 30px 20px 60px;
     box-sizing: border-box;
 }
@@ -19,19 +17,20 @@
 }
 
 .hodimlarr {
-    max-width: 1000px;
+    max-width: 850px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2, minmax(280px, 1fr));
-    gap: 38px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 260px));
+    gap: 16px;
     justify-content: center;
 }
 
 .hodim_card {
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 18px;
-    padding: 20px 18px 16px;
-    min-height: 420px;
+    border-radius: 10px;
+    padding: 14px 10px 10px;
+    height: 280px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,14 +39,14 @@
 
 }
 .hodim_img_wrap {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: #f2f2f2;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px auto 22px;
+    margin: 10px auto 14px;
     overflow: hidden;
 }
 
@@ -73,23 +72,26 @@
 
 .hodim_content {
     width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
 .hodim_content h3 {
-    margin: 0 0 18px;
-    font-size: clamp(1.2rem, 1.7vw, 2rem);
-    line-height: 1.35;
-    font-weight: 700;
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    line-height: 1.15;
+    font-weight: 500;
     color: #ffffff;
 }
 
 .hodim_position {
     margin: 0;
-    min-height: 92px;
+    min-height: 48px;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.05rem;
-    line-height: 1.45;
+    font-size: 0.95rem;
+    line-height: 1.25;
     font-weight: 400;
 }
 
@@ -97,8 +99,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 16px;
-    padding-top: 8px;
+    margin-top: auto;
+    padding-top: 6px;
     border-top: 1px solid rgba(255, 255, 255, 0.09);
     color: rgba(255, 255, 255, 0.85);
 }
@@ -107,7 +109,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .hodim_calendar_icon {
@@ -142,11 +144,17 @@
 
 @media (max-width: 768px) {
     .hodimlarr {
-        grid-template-columns: 1fr;
-        gap: 28px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 260px));
+        gap: 16px;
     }
 
     .hodim_card {
-        min-height: auto;
+        height: 280px;
+    }
+}
+
+@media (max-width: 560px) {
+    .hodimlarr {
+        grid-template-columns: minmax(0, 320px);
     }
 }

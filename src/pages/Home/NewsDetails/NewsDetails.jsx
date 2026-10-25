@@ -88,14 +88,6 @@ export default function NewsDetails() {
   return (
     <article className="news-detail">
       <div className="container1">
-        <nav className="news-detail__breadcrumb" aria-label="Breadcrumb">
-          <Link to="/">{t("header.home", "Bosh sahifa")}</Link>
-          <span aria-hidden="true">/</span>
-          <Link to="/">{t("header.news", "Yangiliklar")}</Link>
-          <span aria-hidden="true">/</span>
-          <span>{title}</span>
-        </nav>
-
         <header className="news-detail__header">
           <h1>{title}</h1>
           <div className="news-detail__meta">

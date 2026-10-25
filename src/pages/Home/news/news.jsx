@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FiCalendar, FiEye } from 'react-icons/fi';
 import api from '../../../api';
-import { Icons } from '../../../icons/icons';
 import './news.css';
 
 const getLocalizedText = (value, language) => {
@@ -30,7 +29,7 @@ const formatDate = (value, language) => {
   }).format(date);
 };
 
-const News = () => {
+const News = ({ showDetails = false }) => {
   const { i18n, t } = useTranslation();
   const currentLang = (i18n.resolvedLanguage || i18n.language || 'uz').split('-')[0];
   const [data, setData] = useState([]);
@@ -76,14 +75,8 @@ const News = () => {
   return (
     <div className="container">
       <div className="news mt-25">
-        <div className="img_top flex justify-between items-center">
+        <div className="news-heading">
           <h1>{t('news.title')}</h1>
-          <div className="btnn">
-            <button type="button" className="btn flex items-center gap-1">
-              {t('home.more')}
-              <Icons.rightIcon height="1em" />
-            </button>
-          </div>
         </div>
 
         <div className="news-grid">
@@ -118,9 +111,9 @@ const News = () => {
                     </div>
 
                     <h3>{title}</h3>
-                    <span className="news-link-btn">
-                      {t('home.more')}
-                    </span>
+                    {showDetails && (
+                      <span className="news-link-btn">{t('home.more')}</span>
+                    )}
                   </div>
                 </Link>
               </article>

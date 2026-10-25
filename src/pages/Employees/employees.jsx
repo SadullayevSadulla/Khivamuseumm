@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import "./employees.css"
 import api from '../../api'
 import { FiCalendar } from 'react-icons/fi'
@@ -33,6 +34,7 @@ const formatDate = (dateString) => {
 }
 
 const Employees = () => {
+    const { t } = useTranslation()
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -62,7 +64,7 @@ const Employees = () => {
     return (
         <section className="hodimlar">
             <div className="hodimlar_titile">
-                <h1>Employees</h1>
+                <h1>{t('header.employees')}</h1>
             </div>
 
             <div className="hodimlarr">
@@ -77,7 +79,7 @@ const Employees = () => {
                         const initials = fullName
                             .split(' ')
                             .filter(Boolean)
-                            .slice(0, 2)
+                            .slice(0, 1)
                             .map((part) => part[0]?.toUpperCase() || '')
                             .join('') || 'X'
 

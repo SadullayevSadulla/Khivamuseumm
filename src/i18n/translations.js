@@ -47,6 +47,9 @@ const translations = {
         loadError: "Yangiliklarni yuklab bo'lmadi",
         notFound: "Yangilik topilmadi",
       },
+      breadcrumb: {
+        details: "Batafsil",
+      },
       footer: {
         location: "Manzil",
         street: "Boltaev ko'chasi, 41-uy, Xiva",
@@ -119,6 +122,9 @@ const translations = {
         loadError: "Не удалось загрузить новости",
         notFound: "Новость не найдена",
       },
+      breadcrumb: {
+        details: "Подробнее",
+      },
       footer: {
         location: "Адрес",
         street: "улица Болтаева, 41, Хива",
@@ -149,7 +155,7 @@ const translations = {
         home: "Home",
         aboutus: "About Us",
         aboutTheMuseum: "About the museum",
-        employees: "Staff",
+        employees: "Employees",
         museumCollection: "Museum collection",
         gallery: "Gallery",
         news: "News",
@@ -190,6 +196,9 @@ const translations = {
         loading: "Loading...",
         loadError: "Could not load news",
         notFound: "News item not found",
+      },
+      breadcrumb: {
+        details: "Details",
       },
       footer: {
         location: "Location",

@@ -54,7 +54,7 @@ export const MainM = () => {
                                 <h2>{getLocalizedText(item.title, language)}</h2>
                                 <p>{getLocalizedText(item.description, language)}</p>
                                 <div className="section_bot_footer">
-                                    <Link className="section_bot_link" to={`/collections/${item.id}`}>
+                                    <Link className="section_bot_link" to="/collections">
                                         {t('home.more')} <Icons.rightIcon height="1em" />
                                     </Link>
                                 </div>
