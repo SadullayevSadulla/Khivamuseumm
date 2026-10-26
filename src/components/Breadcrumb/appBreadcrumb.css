@@ -1,7 +1,7 @@
-.app-breadcrumb-wrap {
-  padding: 14px 24px 0;
-  background: #2f2d2d;
+.app-breadcrumb-wrap{
+  padding: 10px;
 }
+
 
 .app-breadcrumb .ant-breadcrumb-link,
 .app-breadcrumb .ant-breadcrumb-link a,

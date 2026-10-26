@@ -7,6 +7,7 @@ import Gallery from "../pages/gallery/gallery";
 import { Home } from "../pages/Home/home";
 import News from "../pages/Home/news/news";
 import NewsDetails from "../pages/Home/NewsDetails/NewsDetails";
+import { Contact } from "../pages/contact/contact";
 
 export const router = [
     {
@@ -53,5 +54,10 @@ export const router = [
         id: 9,
         path: "/announcements",
         element: <Announcements />
+    },
+    {
+        id:10,
+        path: "/contact",
+        element: <Contact />
     }
 ]

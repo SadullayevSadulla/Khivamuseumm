@@ -30,6 +30,8 @@ const AppBreadcrumb = () => {
     items.push({ title: t('header.museumCollection') })
   } else if (pathname === '/gallery') {
     items.push({ title: t('header.gallery') })
+  }else if (pathname === '/contact') {
+    items.push({ title: t('header.contact') })
   }
 
   return (
