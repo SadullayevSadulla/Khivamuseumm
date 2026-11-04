@@ -8,6 +8,8 @@ import { Home } from "../pages/Home/home";
 import News from "../pages/Home/news/news";
 import NewsDetails from "../pages/Home/NewsDetails/NewsDetails";
 import { Contact } from "../pages/contact/contact";
+import Login from "../pages/login/login";
+import Register from "../pages/Register/register";
 
 export const router = [
     {
@@ -56,8 +58,23 @@ export const router = [
         element: <Announcements />
     },
     {
-        id:10,
+        id: 10,
         path: "/contact",
         element: <Contact />
+    },
+    {
+        id: 11,
+        path: "/login",
+        element: <Login />
+    },
+    {
+        id: 12,
+        path: "/login",
+        element: <Login />
+    },
+    {
+        id: 13,
+        path: "/register",
+        element: <Register />
     }
 ]
