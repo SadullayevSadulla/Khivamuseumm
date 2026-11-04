@@ -4,6 +4,7 @@ import { FiCalendar } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import api from '../../api'
+import Loader from '../../components/Loader/loader'
 import './announcementDetails.css'
 
 const getLocalizedText = (value, language) => {
@@ -65,7 +66,7 @@ export default function AnnouncementDetails() {
     const image = announcement?.images?.find((entry) => entry.mainImage)?.url || announcement?.images?.[0]?.url
 
     if (loading) {
-        return <main className="announcement-detail container" role="status">{t('home.loading')}</main>
+        return <main className="announcement-detail container"><Loader /></main>
     }
 
     if (error) {

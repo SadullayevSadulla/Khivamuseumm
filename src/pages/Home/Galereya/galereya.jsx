@@ -3,6 +3,7 @@ import "./galereya.css"
 import { Icons } from "../../../icons/icons";
 import api from '../../../api';
 import { useTranslation } from 'react-i18next';
+import Loader from '../../../components/Loader/loader';
 
 const Galereya = () => {
     const { t } = useTranslation();
@@ -22,7 +23,7 @@ const Galereya = () => {
         }
         fetchData()
     }, [t])
-    if (loading) return <p>{t('home.loading')}</p>
+    if (loading) return <Loader fullHeight={false} />
     if (error) return <p>{error}</p>
 
     const renderImage = (item) => item && (

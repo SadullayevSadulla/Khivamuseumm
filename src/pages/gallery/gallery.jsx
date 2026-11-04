@@ -6,12 +6,20 @@ import 'lightgallery/css/lightgallery.css'
 import 'lightgallery/css/lg-zoom.css'
 import api from '../../api'
 import './gallery.css'
+import { useTranslation } from 'react-i18next'
+import Loader from '../../components/Loader/loader'
+
 
 const Gallery = () => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const galleryRef = useRef(null)
+  const { t } = useTranslation();
+
+  const galleryItems = data.filter((item) =>
+    item && (item.img || item.url || item.image || item.src)
+  )
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,18 +57,19 @@ const Gallery = () => {
     return () => gallery.destroy()
   }, [data])
 
-  if (loading) return <p>Yuklanmoqda...</p>
+  if (loading) return <Loader />
   if (error) return <p>{error}</p>
 
   return (
     <div className="gallery-page">
       <div className="gallery-title">
-        <h1>Gallery</h1>
+        <h1>{t('gallery.gallerytitle')}</h1>
       </div>
       <div ref={galleryRef} className="gallery-grid">
-        {data.map((item, index) => {
+        {galleryItems.length === 0 ? (
+          <p>{t('noImage')}</p>
+        ) : galleryItems.map((item, index) => {
           const image = item.img || item.url || item.image || item.src
-          if (!image) return null
           return (
             <a
               key={item.id || index}

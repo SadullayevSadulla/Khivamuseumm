@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import './mainM.css'
 import api from '../../../api'
 import { Icons } from "../../../icons/icons";
+import Loader from '../../../components/Loader/loader'
 
 const getLocalizedText = (value, language) => {
     if (typeof value === 'string') return value
@@ -30,7 +31,7 @@ export const MainM = () => {
         }
         fetchData()
     }, [t])
-    if (loading) return <p>{t('home.loading')}</p>
+    if (loading) return <Loader fullHeight={false} />
     if (error) return <p>{error}</p>
 
     const language = (i18n.resolvedLanguage || i18n.language || 'uz').split('-')[0]

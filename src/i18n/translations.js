@@ -47,8 +47,35 @@ const translations = {
         loadError: "Yangiliklarni yuklab bo'lmadi",
         notFound: "Yangilik topilmadi",
       },
+      gallery: {
+        gallerytitle: "Galereya"
+      },
       breadcrumb: {
         details: "Batafsil",
+      },
+      contact: {
+        title: "SAVOLLAR BORMU? <br /> BIZ BILAN BOG'LANING!",
+        name: "Ism",
+        lastName: "Familiya",
+        phone: "Telefon",
+        email: "Elektron pochta",
+        message: "Xabar",
+        sendBtn: "Yuborish",
+        successMsg: "Xabaringiz muvaffaqiyatli yuborildi!",
+        errorMsg: "Xabar yuborishda xatolik yuz berdi",
+        errorLoad: "Xatolik yuz berdi",
+        placeholders: {
+          name: "Ismingizni kiriting",
+          lastName: "Familiyangizni kiriting",
+          message: "Savol/xabaringizni yozing"
+        },
+        info: {
+          location: "Manzil",
+          phone: "Telefon",
+          email: "Elektron pochta",
+          bank: "Bank",
+          fax: "Tel/faks"
+        }
       },
       footer: {
         location: "Manzil",
@@ -121,6 +148,33 @@ const translations = {
         loading: "Загрузка...",
         loadError: "Не удалось загрузить новости",
         notFound: "Новость не найдена",
+      },
+      gallery: {
+        gallerytitle: "Галерея"
+      },
+      contact: {
+        title: "ЕСТЬ ВОПРОСЫ? <br /> СВЯЖИТЕСЬ С НАМИ!",
+        name: "Имя",
+        lastName: "Фамилия",
+        phone: "Телефон",
+        email: "Электронная почта",
+        message: "Сообщение",
+        sendBtn: "Отправить",
+        successMsg: "Ваше сообщение успешно отправлено!",
+        errorMsg: "Произошла ошибка при отправке сообщения",
+        errorLoad: "Произошла ошибка",
+        placeholders: {
+          name: "Введите имя",
+          lastName: "Введите фамилию",
+          message: "Ваш вопрос/сообщение"
+        },
+        info: {
+          location: "Адрес",
+          phone: "Телефон",
+          email: "Электронная почта",
+          bank: "Банк",
+          fax: "Тел/факс"
+        }
       },
       breadcrumb: {
         details: "Подробнее",
@@ -196,6 +250,33 @@ const translations = {
         loading: "Loading...",
         loadError: "Could not load news",
         notFound: "News item not found",
+      },
+      contact: {
+        title: "HAVE QUESTIONS? <br /> CONTACT US!",
+        name: "Name",
+        lastName: "Last name",
+        phone: "Phone",
+        email: "Email",
+        message: "Message",
+        sendBtn: "Send",
+        successMsg: "Your message has been sent successfully!",
+        errorMsg: "There was an error sending the message",
+        errorLoad: "Something went wrong",
+        placeholders: {
+          name: "Enter first name",
+          lastName: "Enter last name",
+          message: "Your question/message"
+        },
+        info: {
+          location: "Location",
+          phone: "Phone",
+          email: "Email",
+          bank: "Bank",
+          fax: "Tel/fax"
+        }
+      },
+      gallery: {
+        gallerytitle: "Gallery"
       },
       breadcrumb: {
         details: "Details",

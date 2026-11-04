@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next' // Tarjima uchun hook
 import "./contact.css"
 import api from '../../api'
+import Loader from '../../components/Loader/loader'
 
 export const Contact = () => {
+  const { t } = useTranslation() 
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -24,14 +27,14 @@ export const Contact = () => {
         if (err instanceof Error) {
           setError(err.message)
         } else {
-          setError("Xatolik yuz berdi")
+          setError(t('contact.errorLoad'))
         }
       } finally {
         setLoading(false)
       }
     }
     fetchData()
-  }, [])
+  }, [t])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -41,14 +44,14 @@ export const Contact = () => {
     e.preventDefault()
     try {
       await api.post("/contact-us", formData)
-      alert("Xabaringiz muvaffaqiyatli yuborildi!")
+      alert(t('contact.successMsg')) 
       setFormData({ name: '', lastName: '', phone: '', email: '', message: '' })
     } catch (err) {
-      alert("Xabar yuborishda xatolik yuz berdi")
+      alert(t('contact.errorMsg')) 
     }
   }
 
-  if (loading) return <p className="loading">Yuklanmoqda...</p>
+  if (loading) return <Loader />
 
   return (
     <section className="contact-section">
@@ -56,31 +59,29 @@ export const Contact = () => {
         <div className="contact">
           <div className="contact-top">
             <div className="contact-form-wrapper">
-              <h1 className="contact-title">
-                HAVE QUESTIONS? <br /> CONTACT US!
-              </h1>
+              <h1 className="contact-title" dangerouslySetInnerHTML={{ __html: t('contact.title') }}></h1>
 
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Name <span>*</span></label>
+                    <label>{t('contact.name')} <span>*</span></label>
                     <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Enter first name"
+                      placeholder={t('contact.placeholders.name')}
                       required
                     />
                   </div>
                   <div className="form-group">
-                    <label>Last name <span>*</span></label>
+                    <label>{t('contact.lastName')} <span>*</span></label>
                     <input
                       type="text"
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
-                      placeholder="Enter last name"
+                      placeholder={t('contact.placeholders.lastName')}
                       required
                     />
                   </div>
@@ -88,7 +89,7 @@ export const Contact = () => {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Phone <span>*</span></label>
+                    <label>{t('contact.phone')} <span>*</span></label>
                     <input
                       type="tel"
                       name="phone"
@@ -99,7 +100,7 @@ export const Contact = () => {
                     />
                   </div>
                   <div className="form-group">
-                    <label>Email <span>*</span></label>
+                    <label>{t('contact.email')} <span>*</span></label>
                     <input
                       type="email"
                       name="email"
@@ -112,20 +113,20 @@ export const Contact = () => {
                 </div>
 
                 <div className="form-group full-width">
-                  <label>Message <span>*</span></label>
+                  <label>{t('contact.message')} <span>*</span></label>
                   <textarea
                     rows="6"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder="Your question/message"
+                    placeholder={t('contact.placeholders.message')}
                     required
                   ></textarea>
                 </div>
 
                 <div className="form-btn-wrapper">
                   <button type="submit" className="submit-btn">
-                    Send
+                    {t('contact.sendBtn')}
                   </button>
                 </div>
               </form>
@@ -145,15 +146,15 @@ export const Contact = () => {
 
           <div className="contact-info-grid">
             <div className="info-item">
-              <h3>Location</h3>
+              <h3>{t('contact.info.location')}</h3>
               <p>{data?.location || "41 Boltaeva Street, Khiva, Khorezm region"}</p>
             </div>
             <div className="info-item">
-              <h3>Phone</h3>
+              <h3>{t('contact.info.phone')}</h3>
               <p>{data?.phone || "+998 55 604 63 43"}</p>
             </div>
             <div className="info-item">
-              <h3>Email</h3>
+              <h3>{t('contact.info.email')}</h3>
               <p>{data?.email || "info@khivamuseum.uz"}</p>
             </div>
             <div className="info-item">
@@ -169,11 +170,11 @@ export const Contact = () => {
               <p>{data?.inn || "201126524"}</p>
             </div>
             <div className="info-item">
-              <h3>Bank</h3>
+              <h3>{t('contact.info.bank')}</h3>
               <p>{data?.bank || "Toshkent shahar Markaziy banki"}</p>
             </div>
             <div className="info-item">
-              <h3>Tel/faks</h3>
+              <h3>{t('contact.info.fax')}</h3>
               <p>{data?.fax || "+998 91 857 45 44"}</p>
             </div>
           </div>

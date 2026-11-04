@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import "./employees.css"
 import api from '../../api'
 import { FiCalendar } from 'react-icons/fi'
+import Loader from '../../components/Loader/loader'
 
 const getSafeText = (value) => {
     if (typeof value === 'string') return value
@@ -58,7 +59,7 @@ const Employees = () => {
         fetchData()
     }, [])
 
-    if (loading) return <p>Yuklanmoqda...</p>
+    if (loading) return <Loader />
     if (error) return <p>{error}</p>
 
     return (

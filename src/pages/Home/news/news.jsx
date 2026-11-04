@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FiCalendar, FiEye } from 'react-icons/fi';
 import api from '../../../api';
+import Loader from '../../../components/Loader/loader';
 import './news.css';
 
 const getLocalizedText = (value, language) => {
@@ -56,7 +57,7 @@ const News = ({ showDetails = false }) => {
     return (
       <div className="container">
         <div className="news mt-25">
-              <p>{t('news.loading')}</p>
+          <Loader fullHeight={false} />
         </div>
       </div>
     );

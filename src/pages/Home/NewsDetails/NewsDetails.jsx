@@ -4,6 +4,7 @@ import { FiCalendar, FiEye } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import api from "../../../api";
+import Loader from "../../../components/Loader/loader";
 import "./newsDetails.css";
 
 const getLocalizedText = (value, language) => {
@@ -69,7 +70,7 @@ export default function NewsDetails() {
   const imageUrl = mainImage?.url || news?.images?.[0]?.url;
 
   if (loading) {
-    return <div className="news-detail container1" role="status">{t("news.loading", "Yuklanmoqda...")}</div>;
+    return <div className="news-detail container1"><Loader /></div>;
   }
 
   if (error) {

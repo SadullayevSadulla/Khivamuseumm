@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { FiArrowUpRight, FiCalendar } from 'react-icons/fi'
+import Loader from '../../components/Loader/loader'
 
 const getLocalizedText = (value, language) => {
     if (typeof value === 'string') return value
@@ -53,7 +54,7 @@ const Announcements = () => {
         }
     }, [t])
 
-    if (loading) return <main className="announcements-page container"><p role="status">{t('home.loading')}</p></main>
+    if (loading) return <main className="announcements-page container"><Loader /></main>
     if (error) return <main className="announcements-page container"><p role="alert">{error}</p></main>
 
     return (
