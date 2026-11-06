@@ -10,6 +10,7 @@ import NewsDetails from "../pages/Home/NewsDetails/NewsDetails";
 import { Contact } from "../pages/contact/contact";
 import Login from "../pages/login/login";
 import Register from "../pages/Register/register";
+import VerifyOtp from "../pages/Register/VerifyOtp";
 
 export const router = [
     {
@@ -69,12 +70,12 @@ export const router = [
     },
     {
         id: 12,
-        path: "/login",
-        element: <Login />
+        path: "/register",
+        element: <Register />
     },
     {
         id: 13,
-        path: "/register",
-        element: <Register />
+        path: "/verify-otp",
+        element: <VerifyOtp />
     }
 ]
