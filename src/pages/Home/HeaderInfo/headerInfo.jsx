@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Navigation, Pagination } from 'swiper/modules';
+import { EffectFade, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { Icons } from '../../../icons/icons';
@@ -22,37 +21,26 @@ const slides = [
     id: 2,
     titleKey: 'home.hero.slide2',
     image:
-      'xiva-3.jpg',
+      '/xiva-3.jpg',
   },
   {
     id: 3,
     titleKey: 'home.hero.slide3',
     image:
-      'xiva-2.jpg',
+      '/xiva-2.jpg',
   },
 ];
 
 export const HeaderInfo = () => {
   const { t } = useTranslation();
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
-  const [swiperInstance, setSwiperInstance] = useState(null);
-
-  useEffect(() => {
-    if (!swiperInstance || !prevRef.current || !nextRef.current) return;
-
-    swiperInstance.params.navigation.prevEl = prevRef.current;
-    swiperInstance.params.navigation.nextEl = nextRef.current;
-    swiperInstance.navigation.destroy();
-    swiperInstance.navigation.init();
-    swiperInstance.navigation.update();
-  }, [swiperInstance]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const pad = (n) => String(n).padStart(2, '0');
 
   return (
-    <section className="header-info container">
+    <section className="header-info">
       <div className="header_info__slider">
         <Swiper
-          modules={[EffectFade, Navigation, Pagination]}
+          modules={[EffectFade, Pagination]}
           effect="fade"
           loop={true}
           observer={true}
@@ -61,11 +49,7 @@ export const HeaderInfo = () => {
           slidesPerView={1}
           speed={800}
           allowTouchMove
-          onSwiper={setSwiperInstance}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           pagination={{
             el: '.custom-pagination',
             clickable: true,
@@ -78,7 +62,7 @@ export const HeaderInfo = () => {
               <div
                 className="hero-slide"
                 style={{
-                  backgroundImage: `linear-gradient(180deg, rgba(5, 11, 15, 0.18) 0%, rgba(8, 9, 12, 0.42) 100%), url(${slide.image})`,
+                  backgroundImage: `linear-gradient(180deg, rgba(5, 11, 15, 0.35) 0%, rgba(8, 9, 12, 0.15) 40%, rgba(8, 9, 12, 0.6) 100%), url(${slide.image})`,
                 }}
               >
                 <div className="hero-slide__content">
@@ -96,17 +80,13 @@ export const HeaderInfo = () => {
           ))}
         </Swiper>
 
-        <div className="hero-controls">
-          <button ref={prevRef} type="button" className="hero-nav hero-nav--prev" aria-label={t('home.hero.previousSlide')}>
-            <span>&lt;</span>
-          </button>
+        <div className="hero-progress">
           <div className="custom-pagination" aria-label={t('home.hero.pagination')} />
-          <button ref={nextRef} type="button" className="hero-nav hero-nav--next" aria-label={t('home.hero.nextSlide')}>
-            <span>&gt;</span>
-          </button>
+          <span className="hero-counter">
+            {pad(activeIndex + 1)} / {pad(slides.length)}
+          </span>
         </div>
       </div>
     </section>
   );
 };
-

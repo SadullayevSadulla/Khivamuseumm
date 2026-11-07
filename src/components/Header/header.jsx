@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import "./header.css";
 import { Icons } from "../../icons/icons";
 import LanguageDropdown from "./Language";
@@ -8,6 +9,8 @@ import HeaderModal from "./headerModol";
 
 const Header = () => {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
   const [isModal, setIsModal] = useState(false);
   const [isMenuFixed, setIsMenuFixed] = useState(false);
   const menuBarRef = useRef(null);
@@ -31,10 +34,10 @@ const Header = () => {
       window.removeEventListener("scroll", updateFixedMenu);
       window.removeEventListener("resize", measureMenuBar);
     };
-  }, []);
+  }, [pathname]);
 
   return (
-    <div className="wrap relative">
+    <div className={`wrap relative ${isHome ? "wrap--overlay" : ""}`}>
       {isModal && (
         <div
           className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px]"

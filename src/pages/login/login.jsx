@@ -2,11 +2,16 @@ import { FiEye, FiEyeOff, FiLoader, FiLock, FiMail } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../../api.js";
+import api from "../../api.js"; 
 
-export default function Login() {
+export default function LoginaPage() {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language || "uz";
+  
+  useEffect(() => {
+    document.title = t("meta.login");
+  }, [t]);
+
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -49,13 +54,10 @@ export default function Login() {
     } catch (err) {
       // Axios xatoliklarini to'g'ri ushlash va foydalanuvchiga ko'rsatish
       if (err.response) {
-        // Serverdan xatolik javobi keldi (masalan, 400, 401, 500)
         setError(err.response.data?.message || err.response.data?.error || "Email yoki parol noto'g'ri!");
       } else if (err.request) {
-        // So'rov yuborildi, lekin javob olinmadi (internet tarmog'i yo'q yoki server o'chgan)
         setError("Server bilan ulanib bo'lmadi. Tarmoqni tekshiring.");
       } else {
-        // Boshqa xatolik (masalan, kodning o'zida)
         setError(err.message || "Xatolik yuz berdi");
       }
     } finally {
@@ -65,51 +67,59 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex items-center justify-center py-20">
-        <div className="p-12 bg-[#1a1a1a] rounded-lg">
+      <div className="flex items-center justify-center py-20 px-4 text-white">
+        <div className="w-full max-w-md rounded-lg bg-[#1a1a1a] p-6 sm:p-12">
           <div>
-            <h2 className="font-bold text-2xl text-link-hover text-center">
+            <h2 className="text-center text-2xl font-bold text-link-hover">
               Kirish
             </h2>
-            <p className="text-red-500 pb-3 max-w-100 text-center">{error}</p>
+            {error && (
+              <p className="mx-auto max-w-100 pb-3 pt-2 text-center text-red-500">
+                {error}
+              </p>
+            )}
           </div>
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                className="font-medium text-base leading-[130%] text-white"
+                className="text-base font-medium leading-[130%] text-white"
               >
                 Email
               </label>
               <div className="relative">
                 <div className="absolute left-2 top-1/2 -translate-y-1/2 p-1">
-                  <FiMail className="w-5 h-5 text-white" />
+                  <FiMail className="h-5 w-5 text-black" />
                 </div>
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   placeholder="Emailingizni kiriting"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="min-w-full outline-none border border-black dark:border-gray-300 rounded-lg px-4 pl-10 py-2 border-white text-white dark:text-white dark:placeholder:text-gray-300 placeholder:text-white"
+                  className="w-full rounded-lg border border-white bg-transparent px-4 py-2 pl-10 text-white outline-none placeholder:text-white focus:border-link-hover"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <label htmlFor="password" className="text-white">Parol</label>
+              <label htmlFor="password" className="text-white">
+                Parol
+              </label>
               <div className="relative">
                 <div className="absolute left-2 top-1/2 -translate-y-1/2 p-1">
-                  <FiLock className="w-5 h-5 text-white" />
+                  <FiLock className="h-5 w-5 text-black" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
+                  id="password"
                   name="password"
                   placeholder="Parolni kiriting"
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="min-w-full outline-none border border-black dark:border-gray-300 rounded-lg px-10 py-2 border border-white text-white dark:text-white dark:placeholder:text-gray-300 placeholder:text-white"
+                  className="w-full rounded-lg border border-white bg-transparent px-10 py-2 text-white outline-none placeholder:text-white focus:border-link-hover"
                 />
                 <button
                   type="button"
@@ -118,12 +128,13 @@ export default function Login() {
                     e.stopPropagation();
                     setShowPassword((prev) => !prev);
                   }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1 cursor-pointer"
+                  aria-label={showPassword ? "Parolni yashirish" : "Parolni ko'rsatish"}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer p-1"
                 >
                   {showPassword ? (
-                    <FiEye className="w-4 h-4 text-white" />
+                    <FiEye className="h-4 w-4 text-black" />
                   ) : (
-                    <FiEyeOff className="w-4 h-4 text-white" />
+                    <FiEyeOff className="h-4 w-4 text-black" />
                   )}
                 </button>
               </div>
@@ -131,10 +142,10 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center justify-center w-full py-2 text-base text-center bg-[#E5A93C] hover:bg-[#c9922e] rounded-lg text-white" 
+              className="flex w-full items-center justify-center rounded-lg bg-link-hover py-2 text-center text-base text-white disabled:opacity-60"
             >
               {loading ? (
-                <FiLoader className="w-4 h-4 animate-spin" />
+                <FiLoader className="h-4 w-4 animate-spin" />
               ) : (
                 "Kirish"
               )}
@@ -142,7 +153,7 @@ export default function Login() {
           </form>
           <div className="flex items-center gap-1 pt-5 text-white">
             <span>Ro'yxatdan o'tganmisiz?</span>
-            <Link to="/register" className="text-[#E5A93C] hover:underline">
+            <Link to="/register" className="text-link-hover">
               Ro'yxatdan o'tish
             </Link>
           </div>

@@ -16,6 +16,15 @@ body{
   background-color: #2c2a2a;
 }
 
+.register input:-webkit-autofill,
+.register input:-webkit-autofill:hover,
+.register input:-webkit-autofill:focus,
+.register input:autofill {
+  -webkit-box-shadow: 0 0 0 1000px #1a1a1a inset;
+  -webkit-text-fill-color: #fff;
+  caret-color: #fff;
+}
+
 @theme {
   --color-dark-main: #202020;
   --color-dark-second: #2a2828;

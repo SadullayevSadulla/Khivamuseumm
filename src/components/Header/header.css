@@ -2,6 +2,21 @@
   background-color:  #1a1a1a;
 }
 
+/* Bosh sahifada header va menyu swiper ustida (shaffof) turadi */
+.wrap.wrap--overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 50;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.wrap--overlay .menu_bar-inner:not(.is-fixed) {
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 .menu_bar {
   min-height: 1px;
 }

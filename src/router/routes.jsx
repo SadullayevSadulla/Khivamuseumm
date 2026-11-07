@@ -10,7 +10,7 @@ import NewsDetails from "../pages/Home/NewsDetails/NewsDetails";
 import { Contact } from "../pages/contact/contact";
 import Login from "../pages/login/login";
 import Register from "../pages/Register/register";
-import VerifyOtp from "../pages/Register/VerifyOtp";
+import VerifyOtpPage from "../pages/Verify";
 
 export const router = [
     {
@@ -74,8 +74,8 @@ export const router = [
         element: <Register />
     },
     {
-        id: 13,
-        path: "/verify-otp",
-        element: <VerifyOtp />
+        id:13,
+        path:"/verify",
+        element:<VerifyOtpPage/>
     }
 ]
