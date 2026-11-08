@@ -6,6 +6,9 @@
   color: white;
 }
 
+.menu-nav {
+  gap: clamp(16px, 2.6vw, 52px);
+}
 .menu-nav a,
 .menu-nav button {
   text-transform: uppercase;

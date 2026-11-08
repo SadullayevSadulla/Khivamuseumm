@@ -149,7 +149,7 @@
 
 @media (max-width: 1023px) {
   .header_top {
-    padding: 10px 5px;
+    padding: 10px 0;
   }
 
   .header_left {
@@ -267,5 +267,38 @@
     gap: 5px;
     padding: 5px;
     font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .header_img {
+    width: 50px;
+  }
+
+  .header_right {
+    gap: 8px;
+  }
+
+  .header_socials {
+    gap: 0;
+  }
+
+  .header_socials a {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+  }
+
+  .language-current {
+    gap: 3px;
+    padding: 0;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .header_top .lang-dropdown-menu {
+    left: auto;
+    right: 0;
   }
 }

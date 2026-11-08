@@ -33,7 +33,7 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: 0 max(40px, calc((100% - 1290px) / 2)) 130px;
+  padding: 0 max(40px, calc((100% - 1290px) / 2)) 100px;
   color: #fff;
 }
 
@@ -81,7 +81,6 @@
   line-height: 1.4;
 }
 
-/* Pagination manzil qatori bilan bir tekisda */
 .hero-progress {
   position: absolute;
   right: max(40px, calc((100% - 1290px) / 2));
@@ -153,5 +152,44 @@
 
   .custom-pagination .swiper-pagination-bullet-active {
     width: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-info {
+    min-height: 520px;
+  }
+
+  .hero-slide {
+    min-height: 520px;
+  }
+
+  .hero-slide__content {
+    padding: 0 16px 100px;
+  }
+
+  .hero-slide__content h1 {
+    font-size: 26px;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-slide__meta {
+    margin-top: 12px;
+    gap: 10px;
+  }
+
+  .hero-slide__meta p {
+    font-size: 0.9rem;
+  }
+
+  .hero-progress {
+    right: 16px;
+    bottom: 32px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-counter {
+    display: none;
   }
 }

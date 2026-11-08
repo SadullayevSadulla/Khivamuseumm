@@ -32,7 +32,7 @@ const Footer = () => {
               <button>{t('footer.openMap')}</button>
             </div>
           </div>
-          <div className="flex justify-between gap-50">
+          <div className="footer_menus flex justify-between gap-50">
             <div className="menu">
               <h1>{t('footer.usefulLinks')}</h1>
               <nav>

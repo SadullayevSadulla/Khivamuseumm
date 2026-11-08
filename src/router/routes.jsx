@@ -2,6 +2,7 @@ import About from "../pages/About/about";
 import Announcements from "../pages/Announcements/announcements";
 import AnnouncementDetails from "../pages/Announcements/AnnouncementDetails";
 import Collactions from "../pages/collections/collactions";
+import CollectionDetails from "../pages/collections/CollectionDetails";
 import Employees from "../pages/Employees/employees";
 import Gallery from "../pages/gallery/gallery";
 import { Home } from "../pages/Home/home";
@@ -40,42 +41,47 @@ export const router = [
     },
     {
         id: 6,
+        path: "/collections/:collectionDetails",
+        element: <CollectionDetails />
+    },
+    {
+        id: 7,
         path: "/collections",
         element: <Collactions />
     },
     {
-        id: 7,
+        id: 8,
         path: "/gallery",
         element: <Gallery />
     },
     {
-        id: 8,
+        id: 9,
         path: "/announcements/:announcementDetails",
         element: <AnnouncementDetails />
     },
     {
-        id: 9,
+        id: 10,
         path: "/announcements",
         element: <Announcements />
     },
     {
-        id: 10,
+        id: 11,
         path: "/contact",
         element: <Contact />
     },
     {
-        id: 11,
+        id: 12,
         path: "/login",
         element: <Login />
     },
     {
-        id: 12,
+        id: 13,
         path: "/register",
         element: <Register />
     },
     {
-        id:13,
-        path:"/verify",
-        element:<VerifyOtpPage/>
+        id: 14,
+        path: "/verify",
+        element: <VerifyOtpPage />
     }
 ]

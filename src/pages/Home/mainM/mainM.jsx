@@ -44,24 +44,33 @@ export const MainM = () => {
                     <p>{t('home.collectionDescription')}</p>
                 </div>
                 <div className="section_bot">
-                    {data.slice(0, 7).map((item, index) => (
-                        <article className="section_bot_card" key={item.id ?? index}>
-                            <img
-                                className="section_bot_image"
-                                src={item.images?.[0]?.url}
-                                alt={getLocalizedText(item.title, language)}
-                            />
-                            <div className="section_bot_content">
-                                <h2>{getLocalizedText(item.title, language)}</h2>
-                                <p>{getLocalizedText(item.description, language)}</p>
-                                <div className="section_bot_footer">
-                                    <Link className="section_bot_link" to="/collections">
-                                        {t('home.more')} <Icons.rightIcon height="1em" />
-                                    </Link>
+                    {data.slice(0, 3).map((item, index) => {
+                        const title = getLocalizedText(item.title, language) || 'Collection';
+                        const description = getLocalizedText(item.description, language) || '';
+                        const detailId = item.slug || item.id
+
+                        return (
+                            <article className="section_bot_card" key={item.id ?? index}>
+                                <img
+                                    className="section_bot_image"
+                                    src={item.images?.[0]?.url}
+                                    alt={title}
+                                />
+                                <div className="section_bot_content">
+                                    <h2>{title}</h2>
+                                    <p>{description}</p>
+                                    <div className="section_bot_footer">
+                                        <Link
+                                            className="section_bot_link"
+                                            to={`/collections/${encodeURIComponent(detailId)}`}
+                                        >
+                                            {t('home.more')} <Icons.rightIcon height="1em" />
+                                        </Link>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    ))}
+                            </article>
+                        )
+                    })}
                 </div>
             </section>
         </div>

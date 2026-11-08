@@ -134,7 +134,7 @@ export default function LanguageDropdown() {
                 </div>
             </button>
             {isLangOpen && (
-                <div className="absolute top-full z-10 left-0 pt-2 w-32 shadow-lg overflow-hidden rounded-lg">
+                <div className="absolute top-full z-10 left-0 pt-2 w-32 lang-dropdown-menu shadow-lg overflow-hidden rounded-lg">
                     <div className="bg-light-second dark:bg-dark-second overflow-hidden rounded-lg">
                         {languages.map((item) => (
                             <button

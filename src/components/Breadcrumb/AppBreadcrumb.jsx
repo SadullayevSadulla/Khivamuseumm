@@ -28,9 +28,12 @@ const AppBreadcrumb = () => {
     items.push({ title: t('header.employees') })
   } else if (pathname === '/collections') {
     items.push({ title: t('header.museumCollection') })
+  } else if (pathname.startsWith('/collections/')) {
+    items.push({ title: <Link to="/collections">{t('header.museumCollection')}</Link> })
+    items.push({ title: t('breadcrumb.details') })
   } else if (pathname === '/gallery') {
     items.push({ title: t('header.gallery') })
-  }else if (pathname === '/contact') {
+  } else if (pathname === '/contact') {
     items.push({ title: t('header.contact') })
   }
 
