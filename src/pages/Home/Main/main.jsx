@@ -8,7 +8,7 @@ export const Main = () => {
     const { t } = useTranslation();
     return (
         <div className='container2'>
-            <section className='main_section flex mt-25 mb-25 justify-between'>
+            <section className='main_section flex gap-5 mt-25 mb-25 justify-between'>
                 <div className="section_left">
                     <div className="left_h1">
                         <h1 className='font-bold text-white max-w-3xl text-2xl md:text-3xl leading-[110%] text-black dark:text-white'>{t('home.introTitle')}</h1>
