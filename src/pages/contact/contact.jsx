@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next' // Tarjima uchun hook
+import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import "./contact.css"
 import api from '../../api'
-import Loader from '../../components/Loader/loader'
 
 export const Contact = () => {
-  const { t } = useTranslation() 
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const { t } = useTranslation()
+  const [submitting, setSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState(null)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -18,40 +16,33 @@ export const Contact = () => {
     message: ''
   })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await api.get("/contacts") 
-        setData(res.data?.data || res.data)
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message)
-        } else {
-          setError(t('contact.errorLoad'))
-        }
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [t])
-
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData((previous) => ({ ...previous, [e.target.name]: e.target.value }))
+    setSubmitMessage(null)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitting(true)
+    setSubmitMessage(null)
+
     try {
-      await api.post("/contact-us", formData)
-      alert(t('contact.successMsg')) 
+      await api.post("/contact", {
+        firstName: formData.name.trim(),
+        lastName: formData.lastName.trim(),
+        phone: formData.phone.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+      })
+      setSubmitMessage({ type: 'success', text: t('contact.successMsg') })
       setFormData({ name: '', lastName: '', phone: '', email: '', message: '' })
     } catch (err) {
-      alert(t('contact.errorMsg')) 
+      const message = err.response?.data?.message || err.response?.data?.error || t('contact.errorMsg')
+      setSubmitMessage({ type: 'error', text: Array.isArray(message) ? message.join(', ') : message })
+    } finally {
+      setSubmitting(false)
     }
   }
-
-  if (loading) return <Loader />
 
   return (
     <section className="contact-section">
@@ -125,10 +116,15 @@ export const Contact = () => {
                 </div>
 
                 <div className="form-btn-wrapper">
-                  <button type="submit" className="submit-btn">
-                    {t('contact.sendBtn')}
+                  <button type="submit" className="submit-btn" disabled={submitting}>
+                    {submitting ? t('loading') : t('contact.sendBtn')}
                   </button>
                 </div>
+                {submitMessage && (
+                  <p className={`contact-form-message contact-form-message--${submitMessage.type}`} role="status">
+                    {submitMessage.text}
+                  </p>
+                )}
               </form>
             </div>
 
@@ -147,35 +143,35 @@ export const Contact = () => {
           <div className="contact-info-grid">
             <div className="info-item">
               <h3>{t('contact.info.location')}</h3>
-              <p>{data?.location || "41 Boltaeva Street, Khiva, Khorezm region"}</p>
+              <p>41 Boltaeva Street, Khiva, Khorezm region</p>
             </div>
             <div className="info-item">
               <h3>{t('contact.info.phone')}</h3>
-              <p>{data?.phone || "+998 55 604 63 43"}</p>
+              <p>+998 55 604 63 43</p>
             </div>
             <div className="info-item">
               <h3>{t('contact.info.email')}</h3>
-              <p>{data?.email || "info@khivamuseum.uz"}</p>
+              <p>info@khivamuseum.uz</p>
             </div>
             <div className="info-item">
               <h3>R/S</h3>
-              <p>{data?.rs || "400121860334067082200349001"}</p>
+              <p>400121860334067082200349001</p>
             </div>
             <div className="info-item">
               <h3>MFO</h3>
-              <p>{data?.mfo || "00014"}</p>
+              <p>00014</p>
             </div>
             <div className="info-item">
               <h3>INN</h3>
-              <p>{data?.inn || "201126524"}</p>
+              <p>201126524</p>
             </div>
             <div className="info-item">
               <h3>{t('contact.info.bank')}</h3>
-              <p>{data?.bank || "Toshkent shahar Markaziy banki"}</p>
+              <p>Toshkent shahar Markaziy banki</p>
             </div>
             <div className="info-item">
               <h3>{t('contact.info.fax')}</h3>
-              <p>{data?.fax || "+998 91 857 45 44"}</p>
+              <p>+998 91 857 45 44</p>
             </div>
           </div>
         </div>
