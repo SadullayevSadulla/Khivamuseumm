@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@iconify-react/akar-icons": "gitlab:iconify-icons/react#akar-icons",
+    "@iconify-react/arcticons": "gitlab:iconify-icons/react#arcticons",
     "@tailwindcss/vite": "^4.3.3",
     "antd": "^6.6.7",
     "axios": "^1.20.0",

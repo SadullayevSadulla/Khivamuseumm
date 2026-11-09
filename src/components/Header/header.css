@@ -255,13 +255,14 @@
     width: 62px;
   }
 
-  .header_socials a {
-    padding: 0 5px;
+  .header_socials{
+    display: none;
   }
 
   .language-selector {
     margin-left: 4px;
   }
+  
 
   .language-current {
     gap: 5px;

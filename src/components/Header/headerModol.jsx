@@ -8,19 +8,19 @@ export default function HeaderModal({ isModal, closeModal }) {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className={`fixed left-0 top-0 z-50 w-80 h-dvh transition-transform duration-300 bg-white dark:bg-dark-main ${isModal ? "translate-x-0" : "-translate-x-full"}`}
+      className={`fixed left-0 top-0 z-50 w-80 h-dvh transition-transform duration-300 bg-dark-main ${isModal ? "translate-x-0" : "-translate-x-full"}`}
     >
       <div className="p-5 flex flex-col h-full justify-between">
         <div className="flex items-center justify-between pb-5 border-b border-b-link-hover">
           <Link to={"/"}>
             <img
-              src="/Images/logo.png"
+              src="/logo.png"
               alt="KhivaMuseum logo"
               className="h-14.5"
             />
           </Link>
-          <button onClick={closeModal}>
-            <Icons.closeIcon />
+          <button onClick={closeModal} >
+            <Icons.closeIcon className="text-white" />
           </button>
         </div>
         <div className="flex items-center gap-3 py-5">
@@ -39,49 +39,49 @@ export default function HeaderModal({ isModal, closeModal }) {
           >
             <Link
               to={"/"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.home")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
               to={"/about"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.aboutus")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
               to={"/employees"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.employees")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
               to={"/collections"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.museumCollection")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
               to={"/gallery"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.gallery")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
               to={"/news"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.news")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
             <Link
               to={"/announcements"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.announcements")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
@@ -89,15 +89,14 @@ export default function HeaderModal({ isModal, closeModal }) {
 
             <Link
               to={"/contact"}
-              className="font-bold text-sm uppercase leading-[110%] group relative"
+              className="font-bold text-sm uppercase leading-[110%] group relative text-white"
             >
               {t("header.contact")}
               <span className="absolute -bottom-2 left-0 w-full h-0.5! bg-link-hover scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left"></span>
             </Link>
           </nav>
         </div>
-        <div>{t('comingSoon')}</div>
-        {/* <div className="shrink-0 bg-white dark:bg-dark-main flex flex-col items-center gap-5 pt-5">
+        <div className="shrink-0 dark:bg-dark-main flex flex-col items-center gap-5 pt-5">
           <div className="flex items-center gap-5 w-full">
             <div className="flex-1">
               <Link
@@ -124,20 +123,20 @@ export default function HeaderModal({ isModal, closeModal }) {
           <div className="grid grid-cols-2 gap-5 w-full">
             <Link
               to="https://t.me/khivamuseum"
-              className="text-base text-black dark:text-white flex items-center gap-2"
+              className="text-base text-white dark:text-white flex items-center gap-2"
             >
               <Icons.telegramIcon className="w-7 h-7" />
               Telegram
             </Link>
             <Link
               to="https://www.instagram.com/khivamuseum/"
-              className="text-base text-black dark:text-white flex items-center gap-2"
+              className="text-base text-white dark:text-white flex items-center gap-2"
             >
               <Icons.footerInstaIcon className="w-7 h-7" />
               Instagram
             </Link>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
