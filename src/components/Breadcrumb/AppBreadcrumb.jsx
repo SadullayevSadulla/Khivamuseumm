@@ -39,7 +39,7 @@ const AppBreadcrumb = () => {
 
   return (
     <div className="app-breadcrumb-wrap">
-      <div className="container">
+      <div className={pathname === '/about' ? 'container2' : 'container'}>
         <Breadcrumb className="app-breadcrumb" items={items} />
       </div>
     </div>

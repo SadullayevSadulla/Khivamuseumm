@@ -7,10 +7,7 @@ import api from "../../api.js";
 export default function LoginaPage() {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language || "uz";
-  
-  useEffect(() => {
-    document.title = t("meta.login");
-  }, [t]);
+
 
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -36,7 +33,6 @@ export default function LoginaPage() {
     setError(null);
 
     try {
-      // Axios yordamida so'rov yuborish
       const response = await api.post("/api/login", {
         email: formData.email.trim(),
         password: formData.password,
@@ -44,7 +40,6 @@ export default function LoginaPage() {
 
       const data = response.data;
 
-      // Agar server muvaffaqiyatli javob qaytarsa, token'ni saqlab profilga yo'naltiramiz
       if (data && data.token) {
         localStorage.setItem("client_token", data.token);
         navigate(`/${currentLang}/profile`, { replace: true });
@@ -52,7 +47,6 @@ export default function LoginaPage() {
         throw new Error("Token olinmadi yoki kutilmagan javob keldi.");
       }
     } catch (err) {
-      // Axios xatoliklarini to'g'ri ushlash va foydalanuvchiga ko'rsatish
       if (err.response) {
         setError(err.response.data?.message || err.response.data?.error || "Email yoki parol noto'g'ri!");
       } else if (err.request) {
@@ -89,7 +83,7 @@ export default function LoginaPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-2 top-1/2 -translate-y-1/2 p-1">
-                  <FiMail className="h-5 w-5 text-black" />
+                  <FiMail className="h-5 w-5 text-white" />
                 </div>
                 <input
                   type="email"
@@ -99,7 +93,7 @@ export default function LoginaPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg border border-white bg-transparent px-4 py-2 pl-10 text-white outline-none placeholder:text-white focus:border-link-hover"
+                  className="w-full rounded-lg border border-white-transparent px-4 py-2 pl-10 text-white outline-none placeholder:text-white"
                 />
               </div>
             </div>
@@ -107,9 +101,9 @@ export default function LoginaPage() {
               <label htmlFor="password" className="text-white">
                 Parol
               </label>
-              <div className="relative">
+              <div className="relative">  
                 <div className="absolute left-2 top-1/2 -translate-y-1/2 p-1">
-                  <FiLock className="h-5 w-5 text-black" />
+                  <FiLock className="h-5 w-5 text-white" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -119,7 +113,7 @@ export default function LoginaPage() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg border border-white bg-transparent px-10 py-2 text-white outline-none placeholder:text-white focus:border-link-hover"
+                  className="w-full rounded-lg border border-white bg-transparent px-10 py-2 text-white outline-none placeholder:text-white"
                 />
                 <button
                   type="button"
@@ -132,9 +126,9 @@ export default function LoginaPage() {
                   className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer p-1"
                 >
                   {showPassword ? (
-                    <FiEye className="h-4 w-4 text-black" />
+                    <FiEye className="h-4 w-4 text-white" />
                   ) : (
-                    <FiEyeOff className="h-4 w-4 text-black" />
+                    <FiEyeOff className="h-4 w-4 text-white" />
                   )}
                 </button>
               </div>

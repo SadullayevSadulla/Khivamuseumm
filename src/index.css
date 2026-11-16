@@ -3,14 +3,17 @@
 .container {
   max-width: 1290px;
   margin:0 auto;
+  padding: 0 20px;
 }
 
 .container2{
   max-width: 1700px;
   margin: 0 auto;
+  padding: 0 20px;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
 
 body{
   background-color: #2c2a2a;

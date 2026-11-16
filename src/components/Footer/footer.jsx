@@ -12,7 +12,9 @@ const Footer = () => {
         <div className="footer py-10 flex justify-between items-center">
           <div className="footer_location flex flex-col gap-5">
             <div className="location_img bg-white w-25.5 rounded-2xl">
-              <img src="/logo (1).png" alt="" className='w-[100px] h-[82px]' />
+              <Link to="/" aria-label="Khiva Museum — bosh sahifa">
+                <img src="/logo (1).png" alt="Khiva Museum" className='w-25 h-20.5' />
+              </Link>
             </div>
             <div className="location_text flex flex-col items-start gap-2">
               <span className='w-22'>{t('footer.location')}</span>
@@ -29,7 +31,13 @@ const Footer = () => {
               <p className='opacity-[0.8] text-white'>{t('footer.region')}</p>
             </div>
             <div className="footer_button">
-              <button>{t('footer.openMap')}</button>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Bola+Toev+ko%27chasi+41%2C+Xiva%2C+Xorazm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t('footer.openMap')}
+              </a>
             </div>
           </div>
           <div className="footer_menus flex justify-between gap-50">
@@ -37,32 +45,32 @@ const Footer = () => {
               <h1>{t('footer.usefulLinks')}</h1>
               <nav>
                 <Link to="/">{t('footer.home')}</Link>
-                <Link to="/">{t('footer.about')}</Link>
-                <Link to="/">{t('footer.news')}</Link>
+                <Link to="/about">{t('footer.about')}</Link>
+                <Link to="/news">{t('footer.news')}</Link>
               </nav>
             </div>
             <div className="menu">
               <h1>{t('footer.usefulLinks')}</h1>
               <nav>
-                <Link to="/">{t('footer.collection')}</Link>
-                <Link to="/">{t('footer.gallery')}</Link>
-                <Link to="/">{t('footer.contact')}</Link>
-                <Link to="/">Khiva 360°</Link>
+                <Link to="/collections">{t('footer.collection')}</Link>
+                <Link to="/gallery">{t('footer.gallery')}</Link>
+                <Link to="/contact">{t('footer.contact')}</Link>
+                <a href="https://khiva360.nazzar.uz/" target="_blank" rel="noopener noreferrer">Khiva 360°</a>
               </nav>
             </div>
             <div className="menu">
               <h1>{t('footer.social')}</h1>
               <nav>
-                <a href="https://www.instagram.com/khivamuseumuzb/"><FaInstagram />Instagram</a>
+                <a href="https://www.instagram.com/khivamuseumuzb" target="_blank" rel="noopener noreferrer"><FaInstagram />Instagram</a>
               </nav>
               <nav>
-                <a href="https://www.youtube.com/@khivamuseum.2025"><FaFacebook />Facebook</a>
+                <a href="https://www.facebook.com/khivamuseumuzb" target="_blank" rel="noopener noreferrer"><FaFacebook />Facebook</a>
               </nav>
               <nav>
-                <a href="https://t.me/sadullayev0627"><FaTelegram />Telegram</a>
+                <a href="https://t.me/khivamuseum" target="_blank" rel="noopener noreferrer"><FaTelegram />Telegram</a>
               </nav>
               <nav>
-                <a href="https://www.youtube.com/@khivamuseum.2025"><FaYoutube />YouTube</a>
+                <a href="https://www.youtube.com/@khivamuseum.2025" target="_blank" rel="noopener noreferrer"><FaYoutube />YouTube</a>
               </nav>
             </div>
           </div>

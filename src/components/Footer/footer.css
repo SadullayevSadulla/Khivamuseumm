@@ -52,7 +52,7 @@
     text-decoration: none;
 }
 
-.footer_button button{
+.footer_button a{
     padding: 12px 32px;
     background-color: #e29e38;
     border-radius: 10px;
@@ -62,7 +62,8 @@
     font-family: var(--font-montserrat);    
     font-size: 14px;
     color: #fff;
-    cursor: pointer;    
+    cursor: pointer;
+    text-decoration: none;
     margin-block: 20px;
 }
 
@@ -121,7 +122,6 @@
 
     .footer_menus {
         width: 100%;
-        justify-content: flex-start;
         flex-wrap: wrap;
         gap: 32px 56px;
     }
@@ -130,7 +130,6 @@
 @media (max-width: 640px) {
     .footer_menus {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 28px 20px;
     }
 

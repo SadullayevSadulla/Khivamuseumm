@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { Icons } from "../../icons/icons";
 import { Link } from "react-router-dom";
 import LanguageDropdown from "./Language";
+import "./header.css"
 
 export default function HeaderModal({ isModal, closeModal }) {
   const { t } = useTranslation();
@@ -96,12 +97,12 @@ export default function HeaderModal({ isModal, closeModal }) {
             </Link>
           </nav>
         </div>
-        <div className="shrink-0 dark:bg-dark-main flex flex-col items-center gap-5 pt-5">
-          <div className="flex items-center gap-5 w-full">
+        <div className="shrink-0 dark:bg-dark-main flex flex-col items-center gap-4 pt-5">
+          <div className="flex items-center gap-2 w-full">
             <div className="flex-1">
               <Link
                 to={"/tickets"}
-                className="flex items-center justify-center gap-1 font-bold text-sm leading-[110%] w-full px-5 h-8.5 rounded-full bg-link-hover hover:bg-link-hover/80 transition-colors duration-300 text-white"
+                className="fix1 flex items-center justify-center gap-1 font-bold text-sm leading-[110%] w-full px-5 h-8.5 rounded-full bg-link-hover hover:bg-link-hover/80 transition-colors duration-300 text-white"
               >
                 {t("header.aTickets")}
                 <span>
@@ -112,7 +113,7 @@ export default function HeaderModal({ isModal, closeModal }) {
             <div>
               <Link
                 to={"/login"}
-                className="flex items-center gap-1 font-bold text-sm leading-[110%] w-full px-1.25 py-1.25 rounded-full bg-link-hover hover:bg-link-hover/80 transition-colors duration-300 text-white"
+                className="fix flex items-center gap-1 font-bold text-sm leading-[110%] w-full px-1.25 py-1.25 rounded-full bg-link-hover hover:bg-link-hover/80 transition-colors duration-300 text-white"
               >
                 <span>
                   <Icons.personIcon />

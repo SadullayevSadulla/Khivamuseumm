@@ -56,3 +56,20 @@
 .section_right img{
     border-radius: 50px;
 }
+
+@media (max-width:1000px) {
+    .main_section{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .section_right img{
+        border-radius: 10px;
+        width: 100%;
+        height: 300px;
+    }
+    .left_h1 h1{
+        font-size: 32px;
+        max-width: 1000px;
+        font-weight: 400;
+    }
+}

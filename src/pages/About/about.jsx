@@ -5,7 +5,9 @@ import { Main } from '../Home/Main/main'
 const About = () => {
   return (
     <div className='container2'>
-        <Main/>
+        <div className="main_fix">
+          <Main/>
+        </div>
     </div>
   )
 }
