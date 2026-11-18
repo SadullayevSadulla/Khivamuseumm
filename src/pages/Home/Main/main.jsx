@@ -7,31 +7,30 @@ import { useTranslation } from 'react-i18next';
 export const Main = () => {
     const { t } = useTranslation();
     return (
-        <div className='container2'>
-            <section className='main_section flex gap-5 mt-15 mb-25 justify-between'>
-                <div className="section_left">
-                    <div className="left_h1">
-                        <h1 className='font-bold text-white max-w-3xl text-2xl md:text-3xl leading-[110%] text-black dark:text-white'>{t('home.introTitle')}</h1>
-                        <p className='font-medium text-white max-w-4xl text-base md:text-lg leading-[130%] text-black dark:text-white my-8 md:my-10'>{t('home.introDescription')}</p>
+        <div className='container'>
+            <section className='main_section kh-section'>
+                <div className="section_left kh-rise">
+                    <div className="kh-head kh-head--left">
+                        <p className="kh-eyebrow">{t('home.eyebrow.about')}</p>
+                        <h1 className="kh-title main_title">{t('home.introTitle')}</h1>
+                        <div className="kh-ornament" aria-hidden="true"><i /></div>
                     </div>
-                    <div className="left_buttons flex gap-5">
-                        <Link to="/" className="ticket_btn">
+                    <p className='main_text'>{t('home.introDescription')}</p>
+                    <div className="left_buttons">
+                        <Link to="/" className="kh-btn kh-btn--solid">
                             <span>{t('home.getTickets')}</span>
-                            <span className="ticket_btn-icon">
-                                <Icons.ticketIcon />
-                            </span>
+                            <Icons.ticketIcon />
                         </Link>
-                        <div className="batafsill">
-                            <Link 
-                            to={"/"} 
-                            className='batafsil'>
-                                <span className='flex items-center gap-2'>{t('home.more')} <Icons.rightIcon height="1em" /></span>
-                            </Link>
-                        </div>
+                        <Link to="/" className="kh-btn">
+                            <span>{t('home.more')}</span>
+                            <Icons.rightIcon height="1em" />
+                        </Link>
                     </div>
                 </div>
-                <div className="section_right">
-                    <img src="/khiva1.jpg" alt="" />
+                <div className="section_right kh-rise">
+                    <div className="main_frame">
+                        <img src="/khiva1.jpg" alt="" loading="lazy" />
+                    </div>
                 </div>
             </section>
         </div>

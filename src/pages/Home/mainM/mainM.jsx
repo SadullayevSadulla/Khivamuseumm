@@ -38,10 +38,12 @@ export const MainM = () => {
 
     return (
         <div className='container'>
-            <section className='section flex flex-col gap-5 mt-30'>
-                <div className="section_top flex-col gap-2">
-                    <h1>{t('home.collectionTitle')}</h1>
-                    <p>{t('home.collectionDescription')}</p>
+            <section className='section kh-section'>
+                <div className="kh-head section_top">
+                    <p className="kh-eyebrow">{t('home.eyebrow.collection')}</p>
+                    <h1 className="kh-title">{t('home.collectionTitle')}</h1>
+                    <div className="kh-ornament" aria-hidden="true"><i /></div>
+                    <p className="kh-lead">{t('home.collectionDescription')}</p>
                 </div>
                 <div className="section_bot">
                     {data.slice(0, 3).map((item, index) => {
@@ -51,17 +53,23 @@ export const MainM = () => {
 
                         return (
                             <article className="section_bot_card" key={item.id ?? index}>
-                                <img
-                                    className="section_bot_image"
-                                    src={item.images?.[0]?.url}
-                                    alt={title}
-                                />
+                                <div className="section_bot_media">
+                                    <img
+                                        className="section_bot_image"
+                                        src={item.images?.[0]?.url}
+                                        alt={title}
+                                        loading="lazy"
+                                    />
+                                </div>
                                 <div className="section_bot_content">
+                                    <span className="section_bot_num" aria-hidden="true">
+                                        {String(index + 1).padStart(2, '0')}
+                                    </span>
                                     <h2>{title}</h2>
                                     <p>{description}</p>
                                     <div className="section_bot_footer">
                                         <Link
-                                            className="section_bot_link"
+                                            className="kh-btn section_bot_link"
                                             to={`/collections/${encodeURIComponent(detailId)}`}
                                         >
                                             {t('home.more')} <Icons.rightIcon height="1em" />

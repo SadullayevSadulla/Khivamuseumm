@@ -158,3 +158,28 @@
         grid-template-columns: minmax(0, 320px);
     }
 }
+.hodimlar_titile h1 {
+    font-family: var(--kh-font-display);
+    font-size: clamp(36px, 4.6vw, 56px);
+    font-weight: 600;
+}
+
+.hodim_card {
+    border: 1px solid var(--kh-line);
+    border-radius: var(--kh-radius);
+    background: var(--kh-surface);
+}
+
+
+
+
+
+.hodim_content h3 {
+    font-family: var(--kh-font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.hodim_position {
+    color: var(--kh-muted);
+}

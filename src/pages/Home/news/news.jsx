@@ -75,9 +75,11 @@ const News = ({ showDetails = false }) => {
 
   return (
     <div className="container">
-      <div className="news mt-25">
-        <div className="news-heading">
-          <h1>{t('news.title')}</h1>
+      <div className="news kh-section">
+        <div className="kh-head news-heading">
+          <p className="kh-eyebrow">{t('home.eyebrow.news')}</p>
+          <h1 className="kh-title">{t('news.title')}</h1>
+          <div className="kh-ornament" aria-hidden="true"><i /></div>
         </div>
 
         <div className="news-grid">
@@ -113,7 +115,7 @@ const News = ({ showDetails = false }) => {
 
                     <h3>{title}</h3>
                     {showDetails && (
-                      <span className="news-link-btn">{t('home.more')}</span>
+                      <span className="news-link-btn">{t('home.more')} <span aria-hidden="true">→</span></span>
                     )}
                   </div>
                 </Link>

@@ -12,6 +12,7 @@ import { Contact } from "../pages/contact/contact";
 import Login from "../pages/login/login";
 import Register from "../pages/Register/register";
 import VerifyOtpPage from "../pages/Verify";
+import Tickets from "../pages/Tickets/tickets";
 
 export const router = [
     {
@@ -83,5 +84,10 @@ export const router = [
         id: 14,
         path: "/verify",
         element: <VerifyOtpPage />
+    },
+    {
+        id: 15,
+        path: "/tickets",
+        element: <Tickets />
     }
 ]

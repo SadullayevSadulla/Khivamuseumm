@@ -1,84 +1,122 @@
 .wrr {
-    background-color: #1a1a1a;
-    padding: 20px 0 0;
+    position: relative;
+    margin-top: 40px;
+    background-color: #161515;
+    padding: 24px 0 0;
+}
+
+.wrr::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--kh-gold-deep), var(--kh-gold), var(--kh-gold-deep), transparent);
 }
 
 .location_text span {
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
     padding-bottom: 5px;
-}
-.locatin_p p {
-    color: #fff;
-    font-size: 14px;
-    font-family: var(--font-montserrat);
-    max-width: 200px;
+    color: var(--kh-text);
+    font-family: var(--kh-font-display);
+    font-size: 26px;
+    font-weight: 600;
 }
 
+.locatin_p p,
 .location_text p {
-    color: #fff;
+    max-width: 240px;
+    color: var(--kh-muted);
+    font-family: var(--kh-font-body);
     font-size: 14px;
-    font-family: var(--font-montserrat);
-    max-width: 200px;
+    line-height: 1.7;
 }
 
-.menu{
+.menu {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.menu h1{
-    color: #fff;
-    font-size: 22px;
-    font-weight: bold;
-    padding-bottom: 5px;
+.menu h1 {
+    position: relative;
+    padding-bottom: 14px;
+    color: var(--kh-text);
+    font-family: var(--kh-font-display);
+    font-size: 26px;
+    font-weight: 600;
 }
 
-.menu nav{
+.menu h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 36px;
+    height: 2px;
+    background: var(--kh-gold);
+}
+
+.menu nav {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
 }
 
-.menu nav a{
+.menu nav a {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #fff;
+    color: var(--kh-muted);
+    font-family: var(--kh-font-body);
     font-size: 14px;
-    font-family: var(--font-montserrat);
     text-decoration: none;
+    transition: color 0.25s var(--kh-ease), transform 0.25s var(--kh-ease);
 }
 
-.footer_button a{
-    padding: 12px 32px;
-    background-color: #e29e38;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
+.menu nav a:hover {
+    color: var(--kh-gold-soft);
+    transform: translateX(4px);
+}
+
+.footer_button a {
+    display: inline-flex;
     align-items: center;
-    font-family: var(--font-montserrat);    
-    font-size: 14px;
-    color: #fff;
-    cursor: pointer;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 28px;
+    margin-block: 8px 0;
+    border: 1px solid var(--kh-gold);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--kh-gold-soft);
+    font-family: var(--kh-font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     text-decoration: none;
-    margin-block: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s var(--kh-ease), color 0.3s var(--kh-ease);
+}
+
+.footer_button a:hover {
+    background: var(--kh-gold);
+    color: #1a1a1a;
 }
 
 .footer_bottom_section {
-    border-top: 1px solid #454545;
+    border-top: 1px solid var(--kh-line);
 }
 
 .footer_bottom {
-    min-height: 64px;
+    min-height: 68px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: #fff;
-    font-family: var(--font-montserrat);
-    font-size: 16px;
+    color: var(--kh-muted);
+    font-family: var(--kh-font-body);
+    font-size: 13px;
 }
 
 .footer_bottom p {
@@ -86,27 +124,29 @@
 }
 
 .footer_bottom a {
-    color: #ffd400;
+    color: var(--kh-gold-soft);
     font-weight: 700;
     text-decoration: none;
 }
 
+
 .back_to_top {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--kh-gold-soft);
     background: transparent;
-    border: 1px dashed #6b7280;
-    border-radius: 6px;
+    border: 1px solid var(--kh-line-gold);
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.3s var(--kh-ease), color 0.3s var(--kh-ease), transform 0.3s var(--kh-ease);
 }
 
 .back_to_top:hover {
-    border: 1px solid #6b7280;
+    background: var(--kh-gold);
+    color: #1a1a1a;
 }
 
 .footer_menus {
@@ -135,7 +175,7 @@
 
     .menu h1,
     .location_text span {
-        font-size: 18px;
+        font-size: 22px;
     }
 
     .footer_bottom {
@@ -144,6 +184,5 @@
         gap: 12px;
         padding: 16px 0;
         text-align: center;
-        font-size: 14px;
     }
 }

@@ -78,7 +78,7 @@ const Footer = () => {
       </footer>
       <section className="footer_bottom_section">
         <div className="footer_bottom container">
-          <p>© 2025. {t('footer.copyright')}&nbsp; {t('footer.developedBy')} <a href="https://limon.uz/">LIMON.UZ</a></p>
+          <p>© 2026. {t('footer.copyright')}&nbsp; {t('footer.developedBy')} <a href="https://limon.uz/">LIMON.UZ</a></p>
           <button
             className="back_to_top"
             type="button"

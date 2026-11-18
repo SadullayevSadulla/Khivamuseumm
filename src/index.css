@@ -50,3 +50,180 @@ body{
   border:1px solid #fff;
   border-radius: 10px;
 }
+
+:root {
+  --kh-gold: #e19d3b;
+  --kh-gold-soft: #e9aa4d;
+  --kh-gold-deep: #995e12;
+  --kh-ink: #1a1a1a;
+  --kh-surface: #232121;
+  --kh-surface-2: #2c2a2a;
+  --kh-line: rgba(255, 255, 255, 0.09);
+  --kh-line-gold: rgba(225, 157, 59, 0.45);
+  --kh-text: #f7f5f2;
+  --kh-muted: #c6beb2;
+  --kh-radius: 14px;
+  --kh-font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --kh-font-body: "Montserrat", "Lato", sans-serif;
+  --kh-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Bo'lim sarlavhasi: kichik yorliq + serif sarlavha + naqsh chizig'i */
+.kh-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  margin-bottom: 52px;
+}
+
+.kh-head--left {
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+.kh-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: var(--kh-gold);
+  font-family: var(--kh-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.kh-eyebrow::before,
+.kh-eyebrow::after {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--kh-gold);
+  opacity: 0.7;
+}
+
+.kh-head--left .kh-eyebrow::before {
+  display: none;
+}
+
+.kh-title {
+  margin: 0;
+  color: var(--kh-text);
+  font-family: var(--kh-font-display);
+  font-size: clamp(34px, 4.6vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+
+.kh-lead {
+  max-width: 760px;
+  margin: 0;
+  color: var(--kh-muted);
+  font-family: var(--kh-font-body);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.kh-ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 140px;
+  color: var(--kh-gold);
+}
+
+.kh-ornament::before,
+.kh-ornament::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--kh-gold));
+}
+
+.kh-ornament::after {
+  background: linear-gradient(270deg, transparent, var(--kh-gold));
+}
+
+.kh-ornament i {
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+/* Tugmalar */
+.kh-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 26px;
+  border: 1px solid var(--kh-gold);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--kh-gold-soft);
+  font-family: var(--kh-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s var(--kh-ease), color 0.3s var(--kh-ease), gap 0.3s var(--kh-ease);
+}
+
+.kh-btn:hover {
+  gap: 16px;
+  background: var(--kh-gold);
+  color: #1a1a1a;
+}
+
+.kh-btn--solid {
+  background: var(--kh-gold);
+  color: #1a1a1a;
+}
+
+.kh-btn--solid:hover {
+  background: var(--kh-gold-soft);
+}
+
+.kh-section {
+  padding: 96px 0;
+}
+
+@media (max-width: 760px) {
+  .kh-section {
+    padding: 64px 0;
+  }
+
+  .kh-head {
+    margin-bottom: 36px;
+  }
+}
+
+@keyframes kh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.kh-rise {
+  animation: kh-rise 0.7s var(--kh-ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kh-rise {
+    animation: none;
+  }
+}

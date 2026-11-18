@@ -64,18 +64,21 @@ const Galereya = () => {
                 data-lg-size="1400-900"
             >
                 <img src={imageUrl} alt={`gallery-${item.id}`} loading="lazy" />
+                <span className="gallery-zoom" aria-hidden="true" />
             </a>
         )
     }
 
     return (
         <div className='container'>
-            <div className="galereya" ref={galleryRef}>
-                <div className="img_top flex justify-between items-center">
-                    <h1>{t('home.galleryTitle')}</h1>
-                    <div className="btnn">
-                        <Link to="/gallery" className='btn flex items-center gap-1'>{t('home.more')}<Icons.rightIcon height="1em" /></Link>
+            <div className="galereya kh-section" ref={galleryRef}>
+                <div className="img_top">
+                    <div className="kh-head kh-head--left">
+                        <p className="kh-eyebrow">{t('home.eyebrow.gallery')}</p>
+                        <h1 className="kh-title">{t('home.galleryTitle')}</h1>
+                        <div className="kh-ornament" aria-hidden="true"><i /></div>
                     </div>
+                    <Link to="/gallery" className='kh-btn'>{t('home.more')}<Icons.rightIcon height="1em" /></Link>
                 </div>
                 <div className="gallery-mosaic">
                     <div className="gallery-left">
