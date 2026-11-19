@@ -1,9 +1,12 @@
 import { FiKey, FiLoader, FiRefreshCw } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import api from "../../api.js"; 
+import api from "../../api.js";
+import AuthLayout from "../Auth/AuthLayout";
 
 export default function VerifyOtpPage() {
+  const { t } = useTranslation();
   const [code, setCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
@@ -17,7 +20,7 @@ export default function VerifyOtpPage() {
 
   useEffect(() => {
     if (!email) {
-      navigate('/register', { replace: true });
+      navigate("/register", { replace: true });
     }
   }, [email, navigate]);
 
@@ -34,34 +37,30 @@ export default function VerifyOtpPage() {
     setError(null);
 
     try {
-      const response = await api.post('/verify-otp', {
+      const response = await api.post("/verify-otp", {
         email: email,
         otp: code.trim(),
       });
-      
+
       const data = response.data;
 
       const token = data.token || data.access_token || data.data?.token;
       if (token) {
         localStorage.setItem("client_token", token);
         if (data.user || data.data?.user) {
-          localStorage.setItem(
-            "client_user",
-            JSON.stringify(data.user || data.data.user),
-          );
+          localStorage.setItem("client_user", JSON.stringify(data.user || data.data.user));
         }
-        navigate('/', { replace: true });
+        navigate("/", { replace: true });
       } else {
-         navigate('/login', { replace: true });
+        navigate("/login", { replace: true });
       }
-
     } catch (err) {
       if (err.response) {
-        setError(err.response.data?.message || err.response.data?.error || "Tasdiqlash kodi xato!");
+        setError(err.response.data?.message || err.response.data?.error || t("auth.verify.wrong"));
       } else if (err.request) {
-        setError("Server bilan ulanib bo'lmadi.");
+        setError(t("auth.networkError"));
       } else {
-        setError(err.message || "Xatolik yuz berdi");
+        setError(err.message || t("auth.genericError"));
       }
     } finally {
       setLoading(false);
@@ -74,14 +73,13 @@ export default function VerifyOtpPage() {
     setError(null);
 
     try {
-      // Axios yordamida qayta yuborish
-      await api.post('/resend-otp', { email });
+      await api.post("/resend-otp", { email });
       setTimer(60);
     } catch (err) {
       if (err.response) {
-        setError(err.response.data?.message || "Kodni qayta yuborib bo'lmadi");
+        setError(err.response.data?.message || t("auth.verify.resendFailed"));
       } else {
-        setError("Server xatosi");
+        setError(t("auth.verify.serverError"));
       }
     } finally {
       setResending(false);
@@ -89,59 +87,55 @@ export default function VerifyOtpPage() {
   };
 
   return (
-    <div className="flex items-center justify-center py-20 px-4">
-      <div className="w-full max-w-md p-6 bg-[#1a1a1a] rounded-2xl">
-        <div className="text-center pb-6">
-          <h2 className="font-bold text-2xl text-white">
-            Emailingizga kod yuborildi shuni kiriting
-          </h2>
-          {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
-        </div>
-
-        <form onSubmit={handleVerify} className="space-y-4">
-          <div>
+    <AuthLayout
+      compact
+      eyebrow={t("auth.verify.eyebrow")}
+      title={t("auth.verify.title")}
+      subtitle={
+        <>
+          {t("auth.verify.subtitle")} <strong>{email}</strong>
+        </>
+      }
+    >
+      <form onSubmit={handleVerify} className="au-form">
+        <div className="au-field au-code">
+          <label htmlFor="otp">{t("auth.verify.codeLabel")}</label>
+          <div className="au-input">
             <input
+              id="otp"
               type="text"
+              inputMode="numeric"
+              autoComplete="one-time-code"
               maxLength={6}
               required
-              placeholder="qodni kiriting"
+              placeholder="••••••"
               value={code}
               onChange={(e) => setCode(e.target.value)}
-              className="w-full p-3 text-center text-2xl font-mono tracking-widest outline-none border border-white dark:border-gray-300 rounded-lg hover:border-white text-white dark:text-white bg-transparent"
+              autoFocus
             />
           </div>
-
-          <button
-            type="submit"
-            disabled={loading || code.length < 4}
-            className="flex items-center justify-center w-full py-2.5 text-base font-semibold bg-link-hover rounded-lg text-white hover:bg-link-hover/90 disabled:opacity-50 cursor-pointer"
-          >
-            {loading ? (
-              <FiLoader className="w-5 h-5 animate-spin" />
-            ) : (
-              "Tasdiqlash"
-            )}
-          </button>
-        </form>
-
-        <div className="text-center mt-5">
-          {timer > 0 ? (
-            <p className="text-sm text-black/50 dark:text-white/50">
-              Kodni qayta yuborish:{" "}
-              <span className="font-bold">{timer}s</span>
-            </p>
-          ) : (
-            <button
-              type="button"
-              onClick={handleResend}
-              disabled={resending}
-              className="text-xs text-link-hover font-semibold inline-flex items-center gap-1 hover:underline cursor-pointer"
-            >
-              Kodni yana bir bor yubosrish
-            </button>
-          )}
         </div>
-      </div>
-    </div>
+
+        {error && <p className="au-error" role="alert">{error}</p>}
+
+        <button
+          type="submit"
+          disabled={loading || code.length < 4}
+          className="kh-btn kh-btn--solid au-submit"
+        >
+          {loading ? <FiLoader className="au-spin" /> : <><FiKey /> {t("auth.verify.submit")}</>}
+        </button>
+      </form>
+
+      <button
+        type="button"
+        className="au-resend"
+        onClick={handleResend}
+        disabled={timer > 0 || resending}
+      >
+        <FiRefreshCw />
+        {timer > 0 ? t("auth.verify.resendIn", { seconds: timer }) : t("auth.verify.resend")}
+      </button>
+    </AuthLayout>
   );
 }
