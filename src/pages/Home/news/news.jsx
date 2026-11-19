@@ -74,6 +74,7 @@ const News = ({ showDetails = false }) => {
   }
 
   return (
+    <section className="news_bg">
     <div className="container">
       <div className="news kh-section">
         <div className="kh-head news-heading">
@@ -125,6 +126,7 @@ const News = ({ showDetails = false }) => {
         </div>
       </div>
     </div>
+    </section>
   );
 };
 

@@ -13,6 +13,13 @@
   border: 1px solid var(--kh-line);
   border-radius: var(--kh-radius);
   background: var(--kh-surface);
+  transition: transform 0.35s var(--kh-ease), border-color 0.35s var(--kh-ease), box-shadow 0.35s var(--kh-ease);
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--kh-line-gold);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.35);
 }
 
 .news-card__link {
@@ -24,6 +31,7 @@
 }
 
 .news-card__link:focus-visible {
+  outline: 2px solid var(--kh-gold);
   outline-offset: -2px;
 }
 
@@ -144,5 +152,35 @@
 @media (max-width: 640px) {
   .news-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.news_bg {
+  --kh-lattice: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23e19d3b' stroke-width='1'%3E%3Crect x='30' y='30' width='60' height='60'/%3E%3Crect x='30' y='30' width='60' height='60' transform='rotate(45 60 60)'/%3E%3Ccircle cx='60' cy='60' r='15'/%3E%3Ccircle cx='60' cy='60' r='4'/%3E%3Cpath d='M0 60H17.6M102.4 60H120M60 0V17.6M60 102.4V120'/%3E%3Crect x='-7' y='-7' width='14' height='14' transform='rotate(45 0 0)'/%3E%3Crect x='113' y='-7' width='14' height='14' transform='rotate(45 120 0)'/%3E%3Crect x='-7' y='113' width='14' height='14' transform='rotate(45 0 120)'/%3E%3Crect x='113' y='113' width='14' height='14' transform='rotate(45 120 120)'/%3E%3C/g%3E%3C/svg%3E");
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 55% 40% at 50% 12%, rgba(225, 157, 59, 0.07), transparent 70%),
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.26) 22%, rgba(0, 0, 0, 0.26) 78%, transparent 100%);
+}
+
+.news_bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--kh-lattice);
+  background-size: 120px 120px;
+  background-position: center top;
+  opacity: 0.16;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+}
+
+@media (max-width: 760px) {
+  .news_bg::before {
+    background-size: 90px 90px;
+    opacity: 0.14;
   }
 }

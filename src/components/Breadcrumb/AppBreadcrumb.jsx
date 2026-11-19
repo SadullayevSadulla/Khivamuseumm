@@ -35,6 +35,8 @@ const AppBreadcrumb = () => {
     items.push({ title: t('header.gallery') })
   } else if (pathname === '/contact') {
     items.push({ title: t('header.contact') })
+  } else if (pathname === '/tickets') {
+    items.push({ title: t('header.aTickets') })
   }
 
   return (

@@ -30,6 +30,9 @@ export const Main = () => {
                 <div className="section_right kh-rise">
                     <div className="main_frame">
                         <img src="/khiva1.jpg" alt="" loading="lazy" />
+                        <span className="main_badge">
+                            <strong>1970</strong>
+                        </span>
                     </div>
                 </div>
             </section>

@@ -18,6 +18,8 @@
     font-size: 15.5px;
     line-height: 1.85;
     display: -webkit-box;
+    -webkit-line-clamp: 9;
+    -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
@@ -41,6 +43,14 @@
     position: relative;
 }
 
+.main_frame::before {
+    content: "";
+    position: absolute;
+    inset: 22px -22px -22px 22px;
+    border: 1px solid var(--kh-line-gold);
+    border-radius: 200px 200px 14px 14px;
+    z-index: 0;
+}
 
 .main_frame img {
     position: relative;
@@ -53,6 +63,20 @@
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
 }
 
+.main_badge {
+    position: absolute;
+    z-index: 2;
+    left: -18px;
+    bottom: 48px;
+    display: grid;
+    place-items: center;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: var(--kh-ink);
+    border: 1px solid var(--kh-gold);
+    box-shadow: 0 0 0 6px rgba(26, 26, 26, 0.9);
+}
 
 .main_badge strong {
     color: var(--kh-gold-soft);
@@ -87,4 +111,29 @@
     .main_badge strong {
         font-size: 24px;
     }
+}
+
+.main_section {
+    position: relative;
+}
+
+.main_section::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -10px;
+    right: -60px;
+    width: min(620px, 70%);
+    height: 110%;
+    background-image: var(--kh-pattern);
+    background-size: 80px 80px;
+    opacity: 0.2;
+    -webkit-mask-image: radial-gradient(ellipse at 70% 45%, #000 15%, transparent 70%);
+    mask-image: radial-gradient(ellipse at 70% 45%, #000 15%, transparent 70%);
+    pointer-events: none;
+}
+
+.section_left {
+    position: relative;
+    z-index: 1;
 }

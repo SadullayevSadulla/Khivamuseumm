@@ -44,8 +44,8 @@
 
 .section_bot_num {
     margin-bottom: 4px;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--kh-line-gold);
+    color: var(--kh-gold);
+    -webkit-text-stroke: 0;
     font-family: var(--kh-font-display);
     font-size: clamp(64px, 7vw, 96px);
     font-weight: 700;
