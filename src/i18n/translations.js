@@ -14,6 +14,67 @@ const translations = {
         aTickets: "Chiptalar",
         openMenu: "Menyuni ochish",
       },
+      profile: {
+        eyebrow: "Shaxsiy kabinet",
+        title: "Profil",
+        loadError: "Profilni yuklab bo'lmadi.",
+        verified: "Email tasdiqlangan",
+        unverified: "Email tasdiqlanmagan",
+        memberSince: "Ro'yxatdan o'tgan sana",
+        logout: "Hisobdan chiqish",
+        roles: { admin: "Administrator", user: "Foydalanuvchi" },
+        errors: { generic: "Xatolik yuz berdi. Qayta urinib ko'ring.", network: "Server bilan ulanib bo'lmadi." },
+        avatar: {
+          change: "Rasmni almashtirish",
+          remove: "Rasmni o'chirish",
+          invalidType: "Faqat rasm faylini tanlang.",
+          tooBig: "Rasm hajmi 5 MB dan oshmasligi kerak.",
+          updated: "Rasm yangilandi.",
+          removed: "Rasm o'chirildi."
+        },
+        tabs: { info: "Ma'lumotlar", password: "Parol", email: "Email" },
+        info: {
+          title: "Shaxsiy ma'lumotlar",
+          description: "Ism va familiyangizni yangilang.",
+          firstName: "Ism",
+          lastName: "Familiya",
+          save: "Saqlash",
+          saved: "Ma'lumotlar saqlandi.",
+          errors: { name: "Ism va familiya kamida 2 ta belgidan iborat bo'lishi kerak." }
+        },
+        password: {
+          title: "Parolni o'zgartirish",
+          description: "Hisobingiz xavfsizligi uchun murakkab parol tanlang.",
+          old: "Joriy parol",
+          new: "Yangi parol",
+          confirm: "Yangi parolni takrorlang",
+          hint: "Kamida 6 ta belgi",
+          save: "Parolni yangilash",
+          saved: "Parol muvaffaqiyatli o'zgartirildi.",
+          errors: {
+            short: "Yangi parol kamida 6 ta belgidan iborat bo'lishi kerak.",
+            mismatch: "Parollar bir-biriga mos kelmayapti.",
+            same: "Yangi parol joriy paroldan farq qilishi kerak."
+          }
+        },
+        email: {
+          title: "Emailni o'zgartirish",
+          description: "Yangi emailingizga tasdiqlash kodi yuboriladi.",
+          current: "Joriy email",
+          newEmail: "Yangi email",
+          request: "Kod olish",
+          codeSent: "Tasdiqlash kodi {{email}} manziliga yuborildi.",
+          codeLabel: "Tasdiqlash kodi",
+          confirm: "Tasdiqlash",
+          back: "Boshqa email kiritish",
+          changed: "Email muvaffaqiyatli o'zgartirildi.",
+          errors: {
+            invalid: "To'g'ri email kiriting.",
+            same: "Bu email allaqachon sizning hisobingizda.",
+            code: "Tasdiqlash kodini kiriting."
+          }
+        }
+      },
       auth: {
         asideEyebrow: "Xiva · Ichan-Qal'a",
         asideTitle: "Ipak yo'li durdonasi",
@@ -220,6 +281,67 @@ const translations = {
         aTickets: "Билеты",
         openMenu: "Открыть меню",
       },
+      profile: {
+        eyebrow: "Личный кабинет",
+        title: "Профиль",
+        loadError: "Не удалось загрузить профиль.",
+        verified: "Email подтверждён",
+        unverified: "Email не подтверждён",
+        memberSince: "Дата регистрации",
+        logout: "Выйти из аккаунта",
+        roles: { admin: "Администратор", user: "Пользователь" },
+        errors: { generic: "Произошла ошибка. Попробуйте ещё раз.", network: "Не удалось подключиться к серверу." },
+        avatar: {
+          change: "Сменить фото",
+          remove: "Удалить фото",
+          invalidType: "Выберите файл изображения.",
+          tooBig: "Размер изображения не должен превышать 5 МБ.",
+          updated: "Фото обновлено.",
+          removed: "Фото удалено."
+        },
+        tabs: { info: "Данные", password: "Пароль", email: "Email" },
+        info: {
+          title: "Личные данные",
+          description: "Обновите своё имя и фамилию.",
+          firstName: "Имя",
+          lastName: "Фамилия",
+          save: "Сохранить",
+          saved: "Данные сохранены.",
+          errors: { name: "Имя и фамилия должны содержать не менее 2 символов." }
+        },
+        password: {
+          title: "Смена пароля",
+          description: "Выберите надёжный пароль для защиты аккаунта.",
+          old: "Текущий пароль",
+          new: "Новый пароль",
+          confirm: "Повторите новый пароль",
+          hint: "Не менее 6 символов",
+          save: "Обновить пароль",
+          saved: "Пароль успешно изменён.",
+          errors: {
+            short: "Новый пароль должен содержать не менее 6 символов.",
+            mismatch: "Пароли не совпадают.",
+            same: "Новый пароль должен отличаться от текущего."
+          }
+        },
+        email: {
+          title: "Смена email",
+          description: "Код подтверждения придёт на новый email.",
+          current: "Текущий email",
+          newEmail: "Новый email",
+          request: "Получить код",
+          codeSent: "Код подтверждения отправлен на {{email}}.",
+          codeLabel: "Код подтверждения",
+          confirm: "Подтвердить",
+          back: "Ввести другой email",
+          changed: "Email успешно изменён.",
+          errors: {
+            invalid: "Введите корректный email.",
+            same: "Этот email уже привязан к вашему аккаунту.",
+            code: "Введите код подтверждения."
+          }
+        }
+      },
       auth: {
         asideEyebrow: "Хива · Ичан-Кала",
         asideTitle: "Жемчужина Шёлкового пути",
@@ -425,6 +547,67 @@ const translations = {
         contact: "Contact",
         aTickets: "Tickets",
         openMenu: "Open menu",
+      },
+      profile: {
+        eyebrow: "Personal account",
+        title: "Profile",
+        loadError: "Could not load your profile.",
+        verified: "Email verified",
+        unverified: "Email not verified",
+        memberSince: "Member since",
+        logout: "Sign out",
+        roles: { admin: "Administrator", user: "User" },
+        errors: { generic: "Something went wrong. Please try again.", network: "Could not connect to the server." },
+        avatar: {
+          change: "Change photo",
+          remove: "Remove photo",
+          invalidType: "Please choose an image file.",
+          tooBig: "The image must be smaller than 5 MB.",
+          updated: "Photo updated.",
+          removed: "Photo removed."
+        },
+        tabs: { info: "Details", password: "Password", email: "Email" },
+        info: {
+          title: "Personal details",
+          description: "Update your first and last name.",
+          firstName: "First name",
+          lastName: "Last name",
+          save: "Save",
+          saved: "Details saved.",
+          errors: { name: "First and last name must be at least 2 characters." }
+        },
+        password: {
+          title: "Change password",
+          description: "Choose a strong password to keep your account safe.",
+          old: "Current password",
+          new: "New password",
+          confirm: "Repeat new password",
+          hint: "At least 6 characters",
+          save: "Update password",
+          saved: "Password changed successfully.",
+          errors: {
+            short: "The new password must be at least 6 characters.",
+            mismatch: "The passwords do not match.",
+            same: "The new password must differ from the current one."
+          }
+        },
+        email: {
+          title: "Change email",
+          description: "A confirmation code will be sent to your new email.",
+          current: "Current email",
+          newEmail: "New email",
+          request: "Get code",
+          codeSent: "A confirmation code was sent to {{email}}.",
+          codeLabel: "Confirmation code",
+          confirm: "Confirm",
+          back: "Use a different email",
+          changed: "Email changed successfully.",
+          errors: {
+            invalid: "Enter a valid email.",
+            same: "This email is already on your account.",
+            code: "Enter the confirmation code."
+          }
+        }
       },
       auth: {
         asideEyebrow: "Khiva · Itchan Kala",

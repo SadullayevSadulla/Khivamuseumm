@@ -8,11 +8,6 @@ import AuthField from "../Auth/AuthField";
 
 export default function RegisterPage() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    document.title = t("meta.register");
-  }, [t]);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -49,7 +44,6 @@ export default function RegisterPage() {
     }
 
     try {
-      // api.js baseURL "https://api.atr.uz/api" bo'lgani uchun faqat "/register" yoziladi
       await api.post("/register", {
         firstName,
         lastName,
@@ -57,7 +51,6 @@ export default function RegisterPage() {
         password,
       });
 
-      // Muvaffaqiyatli bo'lsa verify sahifasiga o'tish
       navigate("/verify", {
         replace: true,
         state: { email },

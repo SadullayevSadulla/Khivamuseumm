@@ -19,10 +19,6 @@ export default function LoginaPage() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document.title = t("auth.login.title");
-  }, [t]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
