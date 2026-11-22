@@ -7,12 +7,7 @@ const AppBreadcrumb = () => {
   const { pathname } = useLocation()
   const { t } = useTranslation()
 
-  if (
-    pathname === '/' ||
-    pathname === '/login' ||
-    pathname === '/register' ||
-    pathname === '/verify'
-  ) return null
+  if (pathname === '/' || pathname === '/login' || pathname === '/register') return null
 
   const homeItem = { title: <Link to="/">{t('header.home')}</Link> }
   let items = [homeItem]
@@ -42,6 +37,8 @@ const AppBreadcrumb = () => {
     items.push({ title: t('header.contact') })
   } else if (pathname === '/tickets') {
     items.push({ title: t('header.aTickets') })
+  } else if (pathname === '/profile') {
+    items.push({ title: t('profile.title') })
   }
 
   return (

@@ -1,28 +1,27 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { FiCamera, FiCheckCircle, FiLoader, FiLock, FiLogOut, FiMail, FiTrash2, FiUser } from 'react-icons/fi'
+import { FiCamera, FiLoader, FiLogOut, FiSettings, FiTrash2, FiUser } from 'react-icons/fi'
+import { IoTicketOutline } from 'react-icons/io5'
 import Loader from '../../components/Loader/loader'
-import EmailTab from './EmailTab'
 import Notice from './Notice'
-import PasswordTab from './PasswordTab'
-import { clearSession, deleteAvatar, fetchProfile, getToken, uploadAvatar } from './profileApi'
+import SettingsView from './SettingsView'
+import TicketsView from './TicketsView'
+import { nextVisitDate } from './ordersUtils'
+import { clearSession, deleteAvatar, fetchMyOrders, fetchProfile, getToken, uploadAvatar } from './profileApi'
 import { extractError, formatDate, getLanguage } from '../Tickets/ticketsUtils'
+import { saveUser } from '../../utils/auth'
 import '../Auth/auth.css'
 import './profile.css'
 
 const MAX_AVATAR_SIZE = 5 * 1024 * 1024
 
-const TABS = [
-  { id: 'info', icon: FiUser },
-  { id: 'password', icon: FiLock },
-  { id: 'email', icon: FiMail },
-]
-
 const pickAvatar = (user) => {
   const images = Array.isArray(user?.images) ? user.images : []
   return (images.find((item) => item.mainImage) || images[0])?.url || null
 }
+
+const initialView = () => (window.location.hash === '#settings' ? 'settings' : 'tickets')
 
 const Profile = () => {
   const { t, i18n } = useTranslation()
@@ -33,7 +32,9 @@ const Profile = () => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState('')
-  const [tab, setTab] = useState('info')
+  const [view, setView] = useState(initialView)
+  const [orders, setOrders] = useState(null)
+  const [ordersError, setOrdersError] = useState('')
   const [avatarBusy, setAvatarBusy] = useState(false)
   const [avatarNotice, setAvatarNotice] = useState(null)
 
@@ -59,9 +60,30 @@ const Profile = () => {
     return fresh
   }, [])
 
+  const loadOrders = useCallback(async () => {
+    setOrdersError('')
+    setOrders(null)
+    try {
+      setOrders(await fetchMyOrders())
+    } catch (err) {
+      const message = resolveError(err)
+      if (message) setOrdersError(t('profile.orders.loadError'))
+      setOrders([])
+    }
+  }, [resolveError, t])
+
+  const changeView = (next) => {
+    setView(next)
+    window.history.replaceState(null, '', `#${next}`)
+  }
+
   useEffect(() => {
     document.title = t('profile.title')
   }, [t])
+
+  useEffect(() => {
+    if (user) saveUser(user)
+  }, [user])
 
   useEffect(() => {
     if (!getToken()) {
@@ -71,6 +93,7 @@ const Profile = () => {
     let active = true
     setLoading(true)
     reload()
+      .then(() => active && loadOrders())
       .catch((err) => {
         if (!active) return
         const message = resolveError(err)
@@ -80,7 +103,7 @@ const Profile = () => {
     return () => {
       active = false
     }
-  }, [navigate, reload, resolveError])
+  }, [])
 
   const handleFile = async (e) => {
     const file = e.target.files?.[0]
@@ -144,16 +167,28 @@ const Profile = () => {
 
   const avatarUrl = pickAvatar(user)
   const initials = `${(user.firstName || '').charAt(0)}${(user.lastName || '').charAt(0)}`.toUpperCase()
-  const roleLabel = t(`profile.roles.${user.role}`, { defaultValue: user.role || '' })
+  const next = orders ? nextVisitDate(orders) : null
 
   return (
     <div className="pf-page">
       <div className="container">
-        <div className="pf-head kh-rise">
-          <p className="kh-eyebrow">{t('profile.eyebrow')}</p>
-          <h1 className="kh-title">{t('profile.title')}</h1>
-          <div className="kh-ornament" aria-hidden="true"><i /></div>
-        </div>
+        <section className="pf-hero kh-rise">
+          <div className="pf-hero__text">
+            <p className="kh-eyebrow">{t('profile.eyebrow')}</p>
+            <h1>{t('profile.hero.greeting', { name: user.firstName })}</h1>
+            <p>{t('profile.hero.subtitle')}</p>
+          </div>
+          <div className="pf-hero__stats">
+            <div>
+              <strong>{orders ? orders.length : '—'}</strong>
+              <span>{t('profile.hero.ticketsCount')}</span>
+            </div>
+            <div>
+              <strong>{next ? formatDate(next, language) : '—'}</strong>
+              <span>{t('profile.hero.nextVisit')}</span>
+            </div>
+          </div>
+        </section>
 
         <div className="pf-grid kh-rise">
           <aside className="pf-side">
@@ -177,57 +212,51 @@ const Profile = () => {
             <h2 className="pf-name">{user.firstName} {user.lastName}</h2>
             <p className="pf-email">{user.email}</p>
 
-            <div className="pf-badges">
-              {roleLabel && <span className="pf-badge">{roleLabel}</span>}
-              <span className={`pf-badge ${user.emailVerified ? 'pf-badge--ok' : 'pf-badge--warn'}`}>
-                {user.emailVerified && <FiCheckCircle />}
-                {user.emailVerified ? t('profile.verified') : t('profile.unverified')}
-              </span>
-            </div>
+            <Notice notice={avatarNotice} />
+
+            {avatarUrl && (
+              <button type="button" className="pf-link" onClick={handleRemoveAvatar} disabled={avatarBusy}>
+                <FiTrash2 /> {t('profile.avatar.remove')}
+              </button>
+            )}
+
+            <nav className="pf-nav" aria-label={t('profile.title')}>
+              <button
+                type="button"
+                className={`pf-nav__item ${view === 'tickets' ? 'is-active' : ''}`}
+                onClick={() => changeView('tickets')}
+              >
+                <IoTicketOutline />
+                <span>{t('profile.nav.tickets')}</span>
+                {orders && orders.length > 0 && <em>{orders.length}</em>}
+              </button>
+              <button
+                type="button"
+                className={`pf-nav__item ${view === 'settings' ? 'is-active' : ''}`}
+                onClick={() => changeView('settings')}
+              >
+                <FiSettings />
+                <span>{t('profile.nav.settings')}</span>
+              </button>
+              <button type="button" className="pf-nav__item pf-nav__item--danger" onClick={logout}>
+                <FiLogOut />
+                <span>{t('profile.logout')}</span>
+              </button>
+            </nav>
 
             {user.createdAt && (
               <p className="pf-since">
                 {t('profile.memberSince')}: <strong>{formatDate(user.createdAt, language)}</strong>
               </p>
             )}
-
-            <Notice notice={avatarNotice} />
-
-            <div className="pf-side__actions">
-              {avatarUrl && (
-                <button type="button" className="pf-link" onClick={handleRemoveAvatar} disabled={avatarBusy}>
-                  <FiTrash2 /> {t('profile.avatar.remove')}
-                </button>
-              )}
-              <button type="button" className="pf-link pf-link--danger" onClick={logout}>
-                <FiLogOut /> {t('profile.logout')}
-              </button>
-            </div>
           </aside>
 
           <section className="pf-main">
-            <div className="pf-tabs" role="tablist">
-              {TABS.map(({ id, icon: Icon }) => (
-                <button
-                  key={id}
-                  type="button"
-                  role="tab"
-                  id={`pf-tab-${id}`}
-                  aria-selected={tab === id}
-                  aria-controls={`pf-panel-${id}`}
-                  className={`pf-tab ${tab === id ? 'is-active' : ''}`}
-                  onClick={() => setTab(id)}
-                >
-                  <Icon /> <span>{t(`profile.tabs.${id}`)}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="pf-panel" role="tabpanel" id={`pf-panel-${tab}`} aria-labelledby={`pf-tab-${tab}`}>
-              {tab === 'info' && <InfoTab user={user} onUpdated={setUser} resolveError={resolveError} />}
-              {tab === 'password' && <PasswordTab resolveError={resolveError} />}
-              {tab === 'email' && <EmailTab user={user} onChanged={reload} resolveError={resolveError} />}
-            </div>
+            {view === 'tickets' ? (
+              <TicketsView orders={orders} error={ordersError} onRetry={loadOrders} />
+            ) : (
+              <SettingsView user={user} onUpdated={setUser} onReload={reload} resolveError={resolveError} />
+            )}
           </section>
         </div>
       </div>

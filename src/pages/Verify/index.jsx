@@ -50,7 +50,7 @@ export default function VerifyOtpPage() {
         if (data.user || data.data?.user) {
           localStorage.setItem("client_user", JSON.stringify(data.user || data.data.user));
         }
-        navigate("/", { replace: true });
+        navigate("/profile", { replace: true });
       } else {
         navigate("/login", { replace: true });
       }

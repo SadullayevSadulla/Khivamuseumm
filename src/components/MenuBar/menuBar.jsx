@@ -4,10 +4,13 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { Icons } from "../../icons/icons";
 import LanguageDropdown from "../Header/Language";
+import ProfileIcon from "./ProfileIcon";          
+import useAuth from "../../hooks/useAuth";
 import "./menuBar.css";
 
 const MenuBar = ({ isFixed = false }) => {
   const { t } = useTranslation();
+  const { loggedIn } = useAuth();
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isNewsOpen, setIsNewsOpen] = useState(false);
 
@@ -140,9 +143,9 @@ const MenuBar = ({ isFixed = false }) => {
                 </Link>
               </div>
               <div className="login-btn-wrap">
-                <Link to={"/login"} className="login-btn">
+                <Link to={loggedIn ? "/profile" : "/login"} className="login-btn">
                   <span className="login-btn-icon">
-                    <Icons.personIcon />
+                    <ProfileIcon size={44} />
                   </span>
                 </Link>
               </div>

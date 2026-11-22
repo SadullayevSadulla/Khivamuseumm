@@ -9,6 +9,7 @@ import {
   resendCode,
   verifyTicket,
 } from './ticketsApi'
+import { getStoredUser } from '../../utils/auth'
 import { extractError, formatDate, formatPrice, getLanguage, getLocalizedText, visitDateRange } from './ticketsUtils'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
@@ -20,9 +21,15 @@ export default function PurchaseModal({ ticket, onClose }) {
   const language = getLanguage(i18n)
   const title = getLocalizedText(ticket.title, language)
 
-  const [step, setStep] = useState('form') // form | code | done
+  const [step, setStep] = useState('form')
   const dateRange = visitDateRange(ticket)
-  const [form, setForm] = useState({ fullName: '', email: '', phone: '', visitDate: dateRange.min })
+  const account = getStoredUser()
+  const [form, setForm] = useState({
+    fullName: account ? `${account.firstName || ''} ${account.lastName || ''}`.trim() : '',
+    email: account?.email || '',
+    phone: '',
+    visitDate: dateRange.min,
+  })
   const [quantity, setQuantity] = useState(1)
   const [code, setCode] = useState('')
   const [orderId, setOrderId] = useState(null)
@@ -32,7 +39,6 @@ export default function PurchaseModal({ ticket, onClose }) {
   const [timer, setTimer] = useState(0)
   const firstFieldRef = useRef(null)
 
-  // Esc bilan yopish + orqa fon scroll'ini qulflash
   useEffect(() => {
     const onKey = (e) => e.key === 'Escape' && onClose()
     document.addEventListener('keydown', onKey)
@@ -77,7 +83,7 @@ export default function PurchaseModal({ ticket, onClose }) {
         visitDate: form.visitDate,
       })
       const id = pickOrderId(res)
-      if (!id) throw new Error('orderId yo\'q')
+      if (!id) throw new Error("orderId yo'q")
       setOrderId(id)
       setTimer(RESEND_SECONDS)
       setCode('')

@@ -111,3 +111,20 @@
   background: #c78a2b;
 }
 
+.login-btn {
+  overflow: hidden;
+}
+
+.profile-icon-img {
+  display: block;
+  object-fit: cover;
+}
+
+.profile-icon-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}

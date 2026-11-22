@@ -7,8 +7,7 @@ import AuthLayout from "../Auth/AuthLayout";
 import AuthField from "../Auth/AuthField";
 
 export default function LoginaPage() {
-  const { t, i18n } = useTranslation();
-  const currentLang = i18n.language || "uz";
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -18,6 +17,10 @@ export default function LoginaPage() {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = t("auth.login.title");
+  }, [t]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +36,7 @@ export default function LoginaPage() {
     setError(null);
 
     try {
-      const response = await api.post("/api/login", {
+      const response = await api.post("/login", {
         email: formData.email.trim(),
         password: formData.password,
       });
@@ -42,7 +45,7 @@ export default function LoginaPage() {
 
       if (data && data.token) {
         localStorage.setItem("client_token", data.token);
-        navigate(`/${currentLang}/profile`, { replace: true });
+        navigate("/profile", { replace: true });
       } else {
         throw new Error(t("auth.login.noToken"));
       }

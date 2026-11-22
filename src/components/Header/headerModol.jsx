@@ -2,10 +2,13 @@ import { useTranslation } from "react-i18next";
 import { Icons } from "../../icons/icons";
 import { Link } from "react-router-dom";
 import LanguageDropdown from "./Language";
+import ProfileIcon from "../MenuBar/ProfileIcon";
+import useAuth from "../../hooks/useAuth";
 import "./header.css"
 
 export default function HeaderModal({ isModal, closeModal }) {
   const { t } = useTranslation();
+  const { loggedIn } = useAuth();
   return (
     <div
       onClick={(e) => e.stopPropagation()}
@@ -110,16 +113,14 @@ export default function HeaderModal({ isModal, closeModal }) {
                 </span>
               </Link>
             </div>
-            <div>
-              <Link
-                to={"/login"}
-                className="fix flex items-center gap-1 font-bold text-sm leading-[110%] w-full px-1.25 py-1.25 rounded-full bg-link-hover hover:bg-link-hover/80 transition-colors duration-300 text-white"
-              >
-                <span>
-                  <Icons.personIcon />
-                </span>
-              </Link>
-            </div>
+            <Link
+              to={loggedIn ? "/profile" : "/login"}
+              className="fix flex items-center gap-1 font-bold text-sm leading-[110%] w-full px-1.25 py-1.25 rounded-full bg-link-hover hover:bg-link-hover/80 transition-colors duration-300 text-white"
+            >
+              <span>
+                <ProfileIcon size={28} round />
+              </span>
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-5 w-full">
             <Link
