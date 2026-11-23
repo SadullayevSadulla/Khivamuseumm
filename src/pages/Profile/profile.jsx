@@ -199,12 +199,13 @@ const Profile = () => {
               )}
               <button
                 type="button"
-                className="pf-avatar__edit"
-                onClick={() => fileRef.current?.click()}
+                className={`pf-avatar__edit ${avatarUrl ? 'pf-avatar__edit--remove' : ''}`}
+                onClick={avatarUrl ? handleRemoveAvatar : () => fileRef.current?.click()}
                 disabled={avatarBusy}
-                aria-label={t('profile.avatar.change')}
+                aria-label={avatarUrl ? t('profile.avatar.remove') : t('profile.avatar.change')}
+                title={avatarUrl ? t('profile.avatar.remove') : t('profile.avatar.change')}
               >
-                <FiCamera />
+                {avatarUrl ? <FiTrash2 /> : <FiCamera />}
               </button>
               <input ref={fileRef} type="file" accept="image/*" hidden onChange={handleFile} />
             </div>
@@ -213,12 +214,6 @@ const Profile = () => {
             <p className="pf-email">{user.email}</p>
 
             <Notice notice={avatarNotice} />
-
-            {avatarUrl && (
-              <button type="button" className="pf-link" onClick={handleRemoveAvatar} disabled={avatarBusy}>
-                <FiTrash2 /> {t('profile.avatar.remove')}
-              </button>
-            )}
 
             <nav className="pf-nav" aria-label={t('profile.title')}>
               <button
