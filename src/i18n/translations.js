@@ -247,7 +247,7 @@ const translations = {
         details: "Batafsil",
       },
       contact: {
-        title: "SAVOLLAR BORMU? <br /> BIZ BILAN BOG'LANING!",
+        title: "SAVOLLAR BORMI? <br /> BIZ BILAN BOG'LANING!",
         name: "Ism",
         lastName: "Familiya",
         phone: "Telefon",

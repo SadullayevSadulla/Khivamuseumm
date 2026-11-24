@@ -43,15 +43,6 @@
     position: relative;
 }
 
-.main_frame::before {
-    content: "";
-    position: absolute;
-    inset: 22px -22px -22px 22px;
-    border: 1px solid var(--kh-line-gold);
-    border-radius: 200px 200px 14px 14px;
-    z-index: 0;
-}
-
 .main_frame img {
     position: relative;
     z-index: 1;

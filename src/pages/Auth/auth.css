@@ -46,7 +46,7 @@
   overflow: hidden;
 }
 
-.au-aside img {
+.au-aside__background {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -316,6 +316,24 @@
 .au-resend:disabled {
   color: var(--kh-muted);
   cursor: default;
+}
+
+.au-aside__logo {
+  position: absolute;
+  z-index: 2;
+  top: 42px;
+  left: 50%;
+  width: 116px;
+  height: auto;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.38));
+}
+
+@media (max-width: 760px) {
+  .au-aside__logo {
+    top: 28px;
+    width: 96px;
+  }
 }
 
 @media (max-width: 860px) {

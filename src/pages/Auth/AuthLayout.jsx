@@ -12,7 +12,8 @@ export default function AuthLayout({
     <section className="au-page">
       <div className={`au-card${compact ? " au-card--compact" : ""}`}>
         {!compact && (
-          <aside className="au-aside" aria-hidden="true">
+          <aside className="au-aside" aria-label="Khiva Museum">
+            <img className="au-aside__background" src="/khiva1.jpg" alt="" />
             <div className="au-aside__text">
               {eyebrow && <span className="kh-eyebrow">{eyebrow}</span>}
               {title && <h2>{title}</h2>}

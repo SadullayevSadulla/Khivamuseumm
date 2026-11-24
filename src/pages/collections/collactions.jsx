@@ -4,7 +4,7 @@ import { MainM } from '../Home/mainM/mainM'
 const Collactions = () => {
   return (
     <div className='container'>
-        <MainM/>
+        <MainM showAll pageSize={3}/>
     </div>
   )
 }
