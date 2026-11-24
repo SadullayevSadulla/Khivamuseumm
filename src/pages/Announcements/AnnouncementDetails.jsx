@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import api from '../../api'
 import Loader from '../../components/Loader/loader'
+import { formatSiteDate } from '../../utils/date'
 import './announcementDetails.css'
 
 const getLocalizedText = (value, language) => {
@@ -12,18 +13,6 @@ const getLocalizedText = (value, language) => {
     if (!value || typeof value !== 'object') return ''
     const localizedValue = value[language] || value.uz || value.en || value.ru
     return typeof localizedValue === 'string' ? localizedValue : ''
-}
-
-const formatDate = (value, language) => {
-    if (!value) return ''
-    const date = new Date(value)
-    if (Number.isNaN(date.getTime())) return ''
-    const locale = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' }[language] || 'uz-UZ'
-    return new Intl.DateTimeFormat(locale, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    }).format(date)
 }
 
 export default function AnnouncementDetails() {
@@ -64,6 +53,8 @@ export default function AnnouncementDetails() {
     const description = getLocalizedText(announcement?.description, language)
     const safeDescription = useMemo(() => DOMPurify.sanitize(description), [description])
     const image = announcement?.images?.find((entry) => entry.mainImage)?.url || announcement?.images?.[0]?.url
+
+    const formatDate = (value, language) => formatSiteDate(value, language, 'long')
 
     if (loading) {
         return <main className="announcement-detail container"><Loader /></main>

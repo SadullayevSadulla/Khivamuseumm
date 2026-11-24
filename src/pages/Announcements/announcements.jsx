@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { FiArrowUpRight, FiCalendar } from 'react-icons/fi'
 import Loader from '../../components/Loader/loader'
+import { formatSiteDate } from '../../utils/date'
 
 const getLocalizedText = (value, language) => {
     if (typeof value === 'string') return value
@@ -13,17 +14,7 @@ const getLocalizedText = (value, language) => {
     return typeof localizedValue === 'string' ? localizedValue : ''
 }
 
-const formatDate = (value, language) => {
-    if (!value) return ''
-    const date = new Date(value)
-    if (Number.isNaN(date.getTime())) return ''
-    const locale = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' }[language] || 'uz-UZ'
-    return new Intl.DateTimeFormat(locale, {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    }).format(date)
-}
+const formatDate = (value, language) => formatSiteDate(value, language, 'long')
 
 const Announcements = () => {
     const { i18n, t } = useTranslation()

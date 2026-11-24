@@ -14,12 +14,23 @@ export const formatPrice = (value) => {
   return Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u00A0')
 }
 
-export const formatDate = (value, language) => {
+export const formatDate = (value) => {
   if (!value) return ''
-  const date = new Date(value)
+  const text = String(value).trim()
+
+  const isoMatch = text.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/)
+  if (isoMatch) {
+    const [, year, month, day] = isoMatch
+    return `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`
+  }
+
+  const date = new Date(text)
   if (Number.isNaN(date.getTime())) return ''
-  const locale = { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' }[language] || 'uz-UZ'
-  return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'short', day: 'numeric' }).format(date)
+
+  const day = String(date.getUTCDate()).padStart(2, '0')
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+  const year = date.getUTCFullYear()
+  return `${day}.${month}.${year}`
 }
 
 export const isExpired = (ticket) => {

@@ -193,3 +193,14 @@
   border: 1px solid var(--kh-line-gold);
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.35);
 }
+
+.contact-section,
+.contact-section .contact,
+.contact-section .contact-top,
+.contact-section .contact-info-grid,
+.contact-section [class*="contact"] {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  visibility: visible !important;
+}

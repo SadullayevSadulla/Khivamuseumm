@@ -2,6 +2,10 @@
     min-height: 100vh;
     padding: 28px 20px 52px;
     box-sizing: border-box;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 .gallery-title {

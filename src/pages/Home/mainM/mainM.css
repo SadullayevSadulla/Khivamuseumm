@@ -44,7 +44,7 @@
 
 .section_bot_num {
     margin-bottom: 4px;
-    color: var(--kh-gold);
+    color: #eca23b;
     -webkit-text-stroke: 0;
     font-family: var(--kh-font-display);
     font-size: clamp(64px, 7vw, 96px);

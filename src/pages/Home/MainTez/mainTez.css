@@ -70,7 +70,7 @@
     width: 84px;
     height: 84px;
     margin-bottom: 8px;
-    border: 1px solid var(--kh-line-gold);
+    border: 1px solid #e19d3b;
     border-radius: 50%;
     color: var(--kh-gold-soft);
     transition: transform 0.4s var(--kh-ease), background-color 0.4s var(--kh-ease);
@@ -79,6 +79,7 @@
 .main_tez_img svg {
     width: 38px;
     height: 38px;
+    color: #e19d3b;
 }
 
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FiCalendar, FiEye } from 'react-icons/fi';
 import api from '../../../api';
 import Loader from '../../../components/Loader/loader';
+import { formatSiteDate } from '../../../utils/date';
 import './news.css';
 
 const getLocalizedText = (value, language) => {
@@ -14,21 +15,7 @@ const getLocalizedText = (value, language) => {
   return typeof localizedValue === 'string' ? localizedValue : '';
 };
 
-const formatDate = (value, language) => {
-  if (!value) return '';
-
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return '';
-
-  const locale =
-    { uz: 'uz-UZ', ru: 'ru-RU', en: 'en-US' }[language] || 'uz-UZ';
-
-  return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(date);
-};
+const formatDate = (value, language) => formatSiteDate(value, language, 'long')
 
 const News = ({ showDetails = false }) => {
   const { i18n, t } = useTranslation();

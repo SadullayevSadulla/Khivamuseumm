@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Pagination } from 'swiper/modules';
+import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -35,13 +35,40 @@ const slides = [
 export const HeaderInfo = () => {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [leavingIndex, setLeavingIndex] = useState(null);
+  const [ready, setReady] = useState(false);
+  const activeRef = useRef(0);
+  const timerRef = useRef(null);
   const pad = (n) => String(n).padStart(2, '0');
+
+  // Birinchi slaydning zoomi sahifa chizilgandan keyin boshlansin
+  useEffect(() => {
+    const id = setTimeout(() => setReady(true), 60);
+    return () => {
+      clearTimeout(id);
+      clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  const handleSlideChange = (swiper) => {
+    const next = swiper.realIndex;
+    const prev = activeRef.current;
+    if (next === prev) return;
+
+    activeRef.current = next;
+    setLeavingIndex(prev);
+    setActiveIndex(next);
+
+    // eski slayd to'liq yashirinib bo'lgach (fade ~0.8s) zoomi qayta tiklanadi
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setLeavingIndex(null), 1300);
+  };
 
   return (
     <section className="header-info">
       <div className="header_info__slider">
         <Swiper
-          modules={[EffectFade, Pagination]}
+          modules={[EffectFade, Pagination, Autoplay]}
           effect="fade"
           loop={true}
           observer={true}
@@ -49,8 +76,9 @@ export const HeaderInfo = () => {
           spaceBetween={0}
           slidesPerView={1}
           speed={800}
+          autoplay={{ delay: 6500, disableOnInteraction: false }}
           allowTouchMove
-          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          onSlideChange={handleSlideChange}
           pagination={{
             el: '.custom-pagination',
             clickable: true,
@@ -58,27 +86,36 @@ export const HeaderInfo = () => {
           }}
           className="hero-swiper"
         >
-          {slides.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <div
-                className="hero-slide"
-                style={{
-                  backgroundImage: `linear-gradient(180deg, rgba(5, 11, 15, 0.35) 0%, rgba(8, 9, 12, 0.15) 40%, rgba(8, 9, 12, 0.6) 100%), url(${slide.image})`,
-                }}
-              >
-                <div className="hero-slide__content">
-                  <h1>{t(slide.titleKey)}</h1>
-                  <div className="hero-slide__meta">
-                    <span className="hero-slide__divider" />
-                    <span className="hero-slide__icon">
-                      <Icons.locationIcon />
-                    </span>
-                    <p>{t('home.hero.location')}</p>
+          {slides.map((slide, index) => {
+            const dir = index % 2 === 0 ? 'zoom-in' : 'zoom-out';
+            const state =
+              ready && index === activeIndex
+                ? 'is-active'
+                : index === leavingIndex
+                ? 'is-leaving'
+                : '';
+
+            return (
+              <SwiperSlide key={slide.id}>
+                <div className="hero-slide">
+                  <div
+                    className={`hero-slide__bg ${dir} ${state}`}
+                    style={{ backgroundImage: `url(${slide.image})` }}
+                  />
+                  <div className="hero-slide__content">
+                    <h1>{t(slide.titleKey)}</h1>
+                    <div className="hero-slide__meta">
+                      <span className="hero-slide__divider" />
+                      <span className="hero-slide__icon">
+                        <Icons.locationIcon />
+                      </span>
+                      <p>{t('home.hero.location')}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
 
         <div className="hero-progress">

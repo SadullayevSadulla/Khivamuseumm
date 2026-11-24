@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import api from "../../../api";
 import Loader from "../../../components/Loader/loader";
+import { formatSiteDate } from "../../../utils/date";
 import "./newsDetails.css";
 
 const getLocalizedText = (value, language) => {
@@ -14,18 +15,7 @@ const getLocalizedText = (value, language) => {
   return typeof localizedValue === "string" ? localizedValue : "";
 };
 
-const formatDate = (value, language) => {
-  if (!value) return "";
-  const date = new Date(value);
-  if (Number.isNaN(date.getTime())) return "";
-
-  const locale = { uz: "uz-UZ", ru: "ru-RU", en: "en-US" }[language] || "uz-UZ";
-  return new Intl.DateTimeFormat(locale, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
-};
+const formatDate = (value, language) => formatSiteDate(value, language, 'long')
 
 export default function NewsDetails() {
   const { newsDetails } = useParams();

@@ -71,8 +71,7 @@
 }
 
 .pf-hero__text h1 {
-  margin: 12px 0 10px;
-  font-family: var(--kh-font-display);
+  margin: 12px 0 10px;  font-family: var(--kh-font-display);
   font-size: clamp(32px, 4vw, 48px);
   font-weight: 600;
   line-height: 1.1;

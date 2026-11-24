@@ -4,6 +4,7 @@ import "./employees.css"
 import api from '../../api'
 import { FiCalendar } from 'react-icons/fi'
 import Loader from '../../components/Loader/loader'
+import { formatSiteDate } from '../../utils/date'
 
 const getSafeText = (value) => {
     if (typeof value === 'string') return value
@@ -21,18 +22,7 @@ const getSafeText = (value) => {
     return ''
 }
 
-const formatDate = (dateString) => {
-    if (!dateString) return ''
-
-    const date = new Date(dateString)
-    if (Number.isNaN(date.getTime())) return dateString
-
-    const day = String(date.getDate()).padStart(2, '0')
-    const month = String(date.getMonth() + 1).padStart(2, '0')
-    const year = date.getFullYear()
-
-    return `${day}.${month}.${year}`
-}
+const formatDate = (dateString) => formatSiteDate(dateString, 'uz', 'short')
 
 const Employees = () => {
     const { t } = useTranslation()

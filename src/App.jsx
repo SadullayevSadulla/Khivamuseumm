@@ -9,7 +9,19 @@ import { router } from "./router/routes";
 const App = () => {
   const location = useLocation();
   const [isPageLoading, setIsPageLoading] = useState(false);
+  const [showEntrance, setShowEntrance] = useState(true);
+  const [isEntranceLeaving, setIsEntranceLeaving] = useState(false);
   const previousLocationKey = useRef(location.key);
+
+  useEffect(() => {
+    const leaveTimer = window.setTimeout(() => setIsEntranceLeaving(true), 1750);
+    const hideTimer = window.setTimeout(() => setShowEntrance(false), 2550);
+
+    return () => {
+      window.clearTimeout(leaveTimer);
+      window.clearTimeout(hideTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (previousLocationKey.current === location.key) return;
@@ -21,8 +33,108 @@ const App = () => {
     return () => window.clearTimeout(timeoutId);
   }, [location.key]);
 
+  useEffect(() => {
+    let observer;
+    let mutationObserver;
+
+    const noRevealRoutes = [
+      '/about', '/collections', '/contact', '/gallery', '/employees',
+      '/announcements', '/news', '/tickets', '/profile', '/login', '/register', '/verify'
+    ];
+    const isNoRevealRoute = noRevealRoutes.some((route) =>
+      location.pathname === route || location.pathname.startsWith(`${route}/`)
+    );
+
+    if (isNoRevealRoute) return;
+
+    const setupReveal = () => {
+      const main = document.querySelector("main");
+      if (!main) return;
+
+      const candidates = main.querySelectorAll(
+        "section, article, [data-reveal], main > *, " +
+        "[class*='card'], [class*='Card'], [class*='item'], [class*='grid'] > *"
+      );
+
+      const revealElements = [...new Set(candidates)].filter((element) => {
+        if (element.closest(".site-entrance, .page-transition-loader")) return false;
+        if (element.closest(
+          ".gallery-mosaic, .gallery-grid, .gallery-left, .gallery-right, .gallery-middle, " +
+          ".contact-section, .contact, .collections-page, .hodimlar, .hodimlarr, " +
+          ".announcements-page, .announcements-grid, .main_fix, .container2"
+        )) return false;
+        return !element.classList.contains("scroll-reveal") && element.offsetParent !== null;
+      });
+
+      revealElements.forEach((element, index) => {
+        element.classList.add("scroll-reveal");
+        element.style.setProperty("--reveal-index", String(Math.min(index % 4, 3)));
+
+        if (!("IntersectionObserver" in window)) {
+          element.classList.add("scroll-reveal--visible");
+        } else if (observer) {
+          observer.observe(element);
+        }
+      });
+    };
+
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("scroll-reveal--visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
+      );
+
+      window.__scrollRevealObserver = observer;
+    }
+
+    const frameId = window.requestAnimationFrame(setupReveal);
+    const retryId = window.setTimeout(setupReveal, 400);
+
+    const main = document.querySelector("main");
+    if (main && "MutationObserver" in window) {
+      mutationObserver = new MutationObserver(() => setupReveal());
+      mutationObserver.observe(main, { childList: true, subtree: true });
+    }
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(retryId);
+      mutationObserver?.disconnect();
+      if (observer) {
+        observer.disconnect();
+        if (window.__scrollRevealObserver === observer) {
+          delete window.__scrollRevealObserver;
+        }
+      }
+    };
+  }, [location.pathname]);
+
   return (
     <>
+      {showEntrance && (
+        <div
+          className={`site-entrance ${isEntranceLeaving ? "is-leaving" : ""}`}
+          role="presentation"
+          aria-hidden="true"
+        >
+          <div className="site-entrance__glow" />
+          <div className="site-entrance__pattern" />
+          <div className="site-entrance__brand">
+            <span className="site-entrance__line site-entrance__line--left" />
+            <img src="/logo.png" alt="" />
+            <span className="site-entrance__line site-entrance__line--right" />
+          </div>
+          <p className="site-entrance__title">Khiva Museum</p>
+          <div className="site-entrance__progress"><span /></div>
+        </div>
+      )}
       <Header />
       <AppBreadcrumb />
       <main>
