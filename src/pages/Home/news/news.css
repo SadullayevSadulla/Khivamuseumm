@@ -82,6 +82,8 @@
   right: -40px;
   bottom: -24px;
   z-index: 0;
+  opacity: 10;
+  color: var(--kh-gold);
   width: 118px;
   height: 118px;
   pointer-events: none;
