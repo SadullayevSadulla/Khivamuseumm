@@ -1,13 +1,10 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FiCheck, FiCopy } from 'react-icons/fi'
 import { formatDate, formatPrice, getLanguage, getLocalizedText } from '../Tickets/ticketsUtils'
 import { isOrderPast, statusTone } from './ordersUtils'
 
 export default function OrderCard({ order }) {
   const { t, i18n } = useTranslation()
   const language = getLanguage(i18n)
-  const [copied, setCopied] = useState(false)
 
   const status = String(order.status || '').toUpperCase()
   const tone = statusTone(order)
@@ -27,16 +24,6 @@ export default function OrderCard({ order }) {
     { label: t('profile.orders.buyer'), value: order.customerName },
     { label: t('profile.orders.phone'), value: order.customerPhone },
   ].filter((field) => field.value !== undefined && field.value !== null && field.value !== '')
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(String(order.ticketNumber))
-      setCopied(true)
-      setTimeout(() => setCopied(false), 1600)
-    } catch {
-      setCopied(false)
-    }
-  }
 
   return (
     <article className={`pf-order pf-order--${tone}`}>
@@ -61,12 +48,6 @@ export default function OrderCard({ order }) {
 
         <footer className="pf-order__foot">
           {order.id && <code>ID: {order.id}</code>}
-          {order.ticketNumber && (
-            <button type="button" className="pf-copy" onClick={handleCopy}>
-              {copied ? <FiCheck /> : <FiCopy />}
-              {copied ? t('profile.orders.copied') : t('profile.orders.copy')}
-            </button>
-          )}
         </footer>
       </div>
     </article>

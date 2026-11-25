@@ -70,6 +70,7 @@ export default function RegisterPage() {
 
   return (
     <AuthLayout
+      compact
       eyebrow={t("auth.register.eyebrow")}
       title={t("auth.register.title")}
       subtitle={t("auth.register.subtitle")}

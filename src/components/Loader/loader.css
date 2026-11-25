@@ -37,7 +37,14 @@
 }
 
 .site-entrance__pattern {
-  display: none;
+  position: absolute;
+  inset: 0;
+  opacity: .09;
+  background-image:
+    linear-gradient(30deg, transparent 48%, rgba(255, 255, 255, .38) 49%, rgba(255, 255, 255, .38) 51%, transparent 52%),
+    linear-gradient(-30deg, transparent 48%, rgba(255, 255, 255, .38) 49%, rgba(255, 255, 255, .38) 51%, transparent 52%);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle, #000 0, transparent 68%);
 }
 
 .site-entrance__glow {

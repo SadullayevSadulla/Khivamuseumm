@@ -172,7 +172,7 @@ const Profile = () => {
   return (
     <div className="pf-page">
       <div className="container">
-        <section className="pf-hero kh-rise">
+        <section className="pf-hero">
           <div className="pf-hero__text">
             <p className="kh-eyebrow">{t('profile.eyebrow')}</p>
             <h1>{t('profile.hero.greeting', { name: user.firstName })}</h1>
@@ -190,7 +190,7 @@ const Profile = () => {
           </div>
         </section>
 
-        <div className="pf-grid kh-rise">
+        <div className="pf-grid">
           <aside className="pf-side">
             <div className="pf-avatar">
               {avatarUrl ? <img src={avatarUrl} alt="" /> : <span>{initials || <FiUser />}</span>}

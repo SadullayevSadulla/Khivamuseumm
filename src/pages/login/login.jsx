@@ -64,6 +64,7 @@ export default function LoginaPage() {
 
   return (
     <AuthLayout
+      compact
       eyebrow={t("auth.login.eyebrow")}
       title={t("auth.login.title")}
       subtitle={t("auth.login.subtitle")}

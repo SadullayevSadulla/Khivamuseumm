@@ -92,7 +92,6 @@
   line-height: 1.7;
 }
 
-/* ----- O'ng panel ----- */
 .au-main {
   padding: 52px 48px 44px;
   color: var(--kh-text);
@@ -102,12 +101,17 @@
 .au-head {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
   margin-bottom: 32px;
+  text-align: center;
 }
 
 .au-head .kh-eyebrow::before {
+  display: none;
+}
+
+.au-head .kh-eyebrow::after {
   display: none;
 }
 
