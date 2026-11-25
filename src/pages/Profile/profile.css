@@ -599,7 +599,6 @@
   margin-bottom: 18px;
   border: 1px solid var(--kh-line-gold);
   border-radius: 50%;
-  background: rgba(225, 157, 59, 0.08);
   color: var(--kh-gold-soft);
   font-size: 20px;
 }
@@ -629,7 +628,6 @@
   padding: 16px 18px;
   border: 1px dashed var(--kh-line-gold);
   border-radius: 12px;
-  background: rgba(225, 157, 59, 0.05);
 }
 
 .pf-current span {

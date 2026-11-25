@@ -9,11 +9,19 @@ import { router } from "./router/routes";
 const App = () => {
   const location = useLocation();
   const [isPageLoading, setIsPageLoading] = useState(false);
-  const [showEntrance, setShowEntrance] = useState(true);
+  const [showEntrance, setShowEntrance] = useState(() => location.pathname === '/');
   const [isEntranceLeaving, setIsEntranceLeaving] = useState(false);
   const previousLocationKey = useRef(location.key);
 
   useEffect(() => {
+    if (location.pathname !== '/') {
+      setShowEntrance(false);
+      setIsEntranceLeaving(false);
+      return;
+    }
+
+    setShowEntrance(true);
+    setIsEntranceLeaving(false);
     const leaveTimer = window.setTimeout(() => setIsEntranceLeaving(true), 1750);
     const hideTimer = window.setTimeout(() => setShowEntrance(false), 2550);
 
@@ -21,19 +29,41 @@ const App = () => {
       window.clearTimeout(leaveTimer);
       window.clearTimeout(hideTimer);
     };
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (previousLocationKey.current === location.key) return;
 
     previousLocationKey.current = location.key;
+
+    if (location.pathname !== '/') {
+      setIsPageLoading(false);
+      return;
+    }
+
     setIsPageLoading(true);
     const timeoutId = window.setTimeout(() => setIsPageLoading(false), 350);
 
     return () => window.clearTimeout(timeoutId);
-  }, [location.key]);
+  }, [location.key, location.pathname]);
 
   useEffect(() => {
+    const clearRevealClasses = () => {
+      document.querySelectorAll("main .scroll-reveal").forEach((element) => {
+        element.classList.remove("scroll-reveal", "scroll-reveal--visible");
+        element.style.removeProperty("--reveal-index");
+      });
+
+      if (window.__scrollRevealObserver) {
+        window.__scrollRevealObserver.disconnect();
+        delete window.__scrollRevealObserver;
+      }
+    };
+
+    clearRevealClasses();
+
+    if (location.pathname !== '/') return;
+
     let observer;
     let mutationObserver;
 

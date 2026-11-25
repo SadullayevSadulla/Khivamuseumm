@@ -27,52 +27,21 @@
   place-content: center;
   justify-items: center;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(225, 157, 59, 0.16), transparent 22%),
-    linear-gradient(145deg, #171515 0%, #292727 58%, #171515 100%);
+  background: #292727;
   color: #fff;
 }
 
 .site-entrance::before,
 .site-entrance::after {
-  content: "";
-  position: absolute;
-  inset: -20%;
-  border: 1px solid rgba(225, 157, 59, 0.22);
-  transform: rotate(45deg) scale(0.7);
-  opacity: 0;
-  animation: entrance-frame 1.5s cubic-bezier(.22,.61,.36,1) .15s forwards;
-}
-
-.site-entrance::after {
-  inset: -14%;
-  border-width: 8px;
-  border-color: rgba(225, 157, 59, 0.08);
-  transform: rotate(45deg) scale(0.84);
-  animation-delay: .28s;
+  content: none;
 }
 
 .site-entrance__pattern {
-  position: absolute;
-  inset: 0;
-  opacity: .09;
-  background-image:
-    linear-gradient(30deg, transparent 48%, rgba(225,157,59,.9) 49%, rgba(225,157,59,.9) 51%, transparent 52%),
-    linear-gradient(-30deg, transparent 48%, rgba(225,157,59,.9) 49%, rgba(225,157,59,.9) 51%, transparent 52%);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(circle, #000 0, transparent 68%);
-  animation: entrance-pattern 2.2s ease-out both;
+  display: none;
 }
 
 .site-entrance__glow {
-  position: absolute;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: rgba(225, 157, 59, .16);
-  filter: blur(75px);
-  transform: scale(.2);
-  animation: entrance-glow 1.8s ease-out forwards;
+  display: none;
 }
 
 .site-entrance__brand {
@@ -95,7 +64,7 @@
 .site-entrance__line {
   width: clamp(28px, 6vw, 76px);
   height: 1px;
-  background: linear-gradient(90deg, transparent, #e19d3b);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .55));
 }
 
 .site-entrance__line--right {
@@ -123,7 +92,7 @@
   width: 190px;
   height: 2px;
   overflow: hidden;
-  background: rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .75);
 }
 
 .site-entrance__progress span {
@@ -204,7 +173,7 @@
   aspect-ratio: 1;
   border-radius: 50%;
   border: 8px solid #0000;
-  border-right-color:#efa52b;
+  border-right-color: rgba(255, 255, 255, .85);
   position: relative;
   animation: l24 1s infinite linear;
 }
