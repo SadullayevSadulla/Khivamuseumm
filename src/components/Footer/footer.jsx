@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./footer.css"
 import { Link } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaTelegram, FaYoutube } from "react-icons/fa";
@@ -6,6 +6,18 @@ import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
   const { t } = useTranslation();
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const updateBackToTopVisibility = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+
+    updateBackToTopVisibility();
+    window.addEventListener('scroll', updateBackToTopVisibility, { passive: true });
+    return () => window.removeEventListener('scroll', updateBackToTopVisibility);
+  }, []);
+
   return (
     <div className='wrr'>
       <footer className='container'>
@@ -78,19 +90,27 @@ const Footer = () => {
       </footer>
       <section className="footer_bottom_section">
         <div className="footer_bottom container">
-          <p className='flex items-center'>© 2026. {t('footer.copyright')}&nbsp; {t('footer.developedBy')} <a href="https://www.limon.uz/"><img className='h-8' src="/limon.webp" alt="" /></a></p>
-          <button
-            className="back_to_top"
-            type="button"
-            aria-label={t('footer.backToTop')}
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+          <p className="footer_copyright">© 2026. {t('footer.copyright')}</p>
+          <div className="footer_credit">
+            <span>{t('footer.developedBy')}</span>
+            <a href="https://www.limon.uz/" aria-label="Limon digital agency">
+              <img src="/limon.webp" alt="Limon" />
+            </a>
+          </div>
         </div>
       </section>
+      {showBackToTop && (
+        <button
+          className="back_to_top"
+          type="button"
+          aria-label={t('footer.backToTop')}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
     </div>
   )
 }

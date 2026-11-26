@@ -69,7 +69,7 @@ function LanguageFlag({ language, size = "text-xl" }) {
     );
 }
 
-export default function LanguageDropdown() {
+export default function LanguageDropdown({ className = "" }) {
     const { i18n } = useTranslation();
     const dropdownRef = useRef(null);
 
@@ -101,10 +101,13 @@ export default function LanguageDropdown() {
     }, []);
 
     return (
-        <div className="relative" ref={dropdownRef}>
+        <div className={`language-dropdown-control relative ${className}`} ref={dropdownRef}>
             <button
+                type="button"
                 onClick={() => setIsLangOpen((prev) => !prev)}
-                className="cursor-pointer px-2 py-0.5"
+                className="language-toggle-button cursor-pointer px-2 py-0.5"
+                aria-expanded={isLangOpen}
+                aria-label={currentLang.name}
             >
                 <div className="flex items-center gap-1">
                     <div className="flex items-center gap-1">

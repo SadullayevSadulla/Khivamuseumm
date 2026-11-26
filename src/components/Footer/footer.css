@@ -47,7 +47,6 @@
     font-weight: 600;
 }
 
-/* Sarlavha ostida qisqa oltin chiziq */
 .menu h1::after {
     content: "";
     position: absolute;
@@ -124,10 +123,23 @@
     margin: 0;
 }
 
+.footer_credit {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+}
+
 .footer_bottom a {
     color: var(--kh-gold-soft);
     font-weight: 700;
     text-decoration: none;
+}
+
+.footer_credit img {
+    display: block;
+    width: auto;
+    height: 32px;
 }
 
 .footer_bottom a:hover {
@@ -135,6 +147,10 @@
 }
 
 .back_to_top {
+    position: fixed;
+    right: 24px;
+    bottom: 12px;
+    z-index: 1000;
     width: 44px;
     height: 44px;
     display: flex;
@@ -146,6 +162,7 @@
     border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.3s var(--kh-ease), color 0.3s var(--kh-ease), transform 0.3s var(--kh-ease);
+    animation: back-to-top-enter 180ms ease-out both;
 }
 
 .back_to_top:hover {
@@ -156,6 +173,18 @@
 
 .footer_menus {
     gap: clamp(24px, 5vw, 120px);
+}
+
+@keyframes back-to-top-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 1023px) {
@@ -189,5 +218,14 @@
         gap: 12px;
         padding: 16px 0;
         text-align: center;
+    }
+
+    .footer_credit {
+        margin-left: 0;
+    }
+
+    .back_to_top {
+        right: 16px;
+        bottom: 16px;
     }
 }

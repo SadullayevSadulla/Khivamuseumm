@@ -128,3 +128,9 @@
     position: relative;
     z-index: 1;
 }
+
+@media (max-width:1310px) {
+    .main_section::before{
+        display: none;
+    }
+}

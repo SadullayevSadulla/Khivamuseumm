@@ -60,17 +60,16 @@ const MenuBar = ({ isFixed = false }) => {
               </button>
               {isAboutOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-46 pt-2 z-50">
-                  <div className="w-full flex flex-col items-center bg-link-hover rounded-lg">
+                  <div className="menu-dropdown-panel">
                     <Link
                       to={"/about"}
-                      className="font-medium text-base leading-[130%] px-5 py-2 text-white"
+                      className="menu-dropdown-item"
                     >
                       {t("header.aboutTheMuseum")}
                     </Link>
-                    <div className="h-px bg-white w-full"></div>
                     <Link
                       to={"/employees"}
-                      className="font-medium text-base leading-[130%] px-5 py-2 text-white"
+                      className="menu-dropdown-item"
                     >
                       {t("header.employees")}
                     </Link>
@@ -114,17 +113,16 @@ const MenuBar = ({ isFixed = false }) => {
               </button>
               {isNewsOpen && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-45 pt-2 z-50">
-                  <div className="w-full flex flex-col items-center bg-link-hover rounded-lg">
+                  <div className="menu-dropdown-panel">
                     <Link
                       to={"/news"}
-                      className="font-medium text-base leading-[130%] px-5 py-2 text-white"
+                      className="menu-dropdown-item"
                     >
                       {t("header.news")}
                     </Link>
-                    <div className="h-px bg-white w-full"></div>
                     <Link
                       to={"/announcements"}
-                      className="font-medium text-base leading-[130%] px-5 py-2 text-white"
+                      className="menu-dropdown-item"
                     >
                       {t("header.announcements")}
                     </Link>
@@ -143,7 +141,7 @@ const MenuBar = ({ isFixed = false }) => {
         </div>
         <div className="flex items-center gap-0.5">
           {isFixed ? (
-            <LanguageDropdown />
+            <LanguageDropdown className="menu-language-fixed" />
           ) : (
             <>
               <div className="ticket-btn-wrap">
