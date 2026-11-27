@@ -82,14 +82,8 @@
   transition: border-color 0.2s ease;
 }
 
-
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #de9435;
-}
-
 .form-group textarea {
-  resize: vertical;
+  resize: none;
 }
 
 .form-btn-wrapper {

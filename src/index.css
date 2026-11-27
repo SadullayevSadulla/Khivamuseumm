@@ -51,10 +51,7 @@ body{
   border-radius: 10px;
 }
 
-/* =====================================================================
-   XIVA HERITAGE — umumiy dizayn tizimi
-   (Header va HeaderInfo bu qoidalardan foydalanmaydi)
-   ===================================================================== */
+
 :root {
   --kh-gold: #e19d3b;
   --kh-gold-soft: #e9aa4d;
@@ -72,7 +69,6 @@ body{
   --kh-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Bo'lim sarlavhasi: kichik yorliq + serif sarlavha + naqsh chizig'i */
 .kh-head {
   display: flex;
   flex-direction: column;
@@ -196,7 +192,6 @@ body{
   background: var(--kh-gold-soft);
 }
 
-/* Bo'limlar orasidagi vertikal ritm */
 .kh-section {
   padding: 96px 0;
 }
